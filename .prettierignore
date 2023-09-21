@@ -1,0 +1,11 @@
+**/.git
+**/.svn
+**/.hg
+**/node_modules
+**/*.cjs
+**/*.js
+node_modules
+dist
+build
+.idea
+.vscode
