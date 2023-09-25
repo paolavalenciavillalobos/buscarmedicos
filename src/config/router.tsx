@@ -1,26 +1,22 @@
-import { Suspense } from 'react'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-
-// PAGES
-import Home from '@/pages/home'
-import Contact from '@/pages/contact'
-import { Spinner } from '@/components/ui'
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />
-  },
-  {
-    path: '/contact',
-    element: <Contact />
-  }
-])
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  createBrowserRouter
+} from 'react-router-dom'
+import BaseLayout from '@/pages/home/baselayout'
+import Login from '@/pages/login/login'
 
 export default function Router() {
   return (
-    <Suspense fallback={<Spinner />}>
-      <RouterProvider router={router} />
-    </Suspense>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/LOGIN" element={<Login />} />
+        <Route path="/" element={<BaseLayout />}>
+          <Route index element={<h1>page2</h1>} />
+          <Route path="/logout" element={<h1>SAIR</h1>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
