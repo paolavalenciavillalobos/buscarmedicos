@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 import BaseLayout from '@/pages/home/baselayout'
 import Login from '@/pages/login/login'
+import { DashboardMenu } from '@/components/home/dashboard/dashboard'
 
 export default function Router() {
   return (
@@ -13,7 +14,7 @@ export default function Router() {
       <Routes>
         <Route path="/LOGIN" element={<Login />} />
         <Route path="/" element={<BaseLayout />}>
-          <Route index element={<h1>page2</h1>} />
+          <Route index element={<DashboardMenu />} />
           <Route path="/logout" element={<h1>SAIR</h1>} />
         </Route>
       </Routes>
