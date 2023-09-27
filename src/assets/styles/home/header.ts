@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 
 export const HeaderStyle = styled.div`
-  height: 12.5vh;
-  width: 100vh;
+  height: 14vh;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-right: 4%;
+  margin-left: 4%;
 `
 export const EmailUser = styled.div`
   margin-left: 3%;

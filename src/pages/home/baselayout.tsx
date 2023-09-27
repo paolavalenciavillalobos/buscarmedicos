@@ -11,11 +11,10 @@ import Notification from '../../assets/images/notifications.png'
 import Faq from '../../assets/images/faq.png'
 import { Logo, Menu, MenuText } from '@/assets/styles/home/menu'
 import { Header } from '@/components/user/header'
-import { DashboardMenu } from '@/components/home/dashboard/dashboard'
 
 export default function BaseLayout() {
   return (
-    <section>
+    <div id="baseDiv" style={{ display: 'flex' }}>
       <Menu>
         <nav>
           <Logo>
@@ -61,10 +60,13 @@ export default function BaseLayout() {
           </ul>
         </nav>
       </Menu>
-      <article>
+      <div
+        id="secondDivChild"
+        style={{ display: 'flex', flexDirection: 'column', flex: '1' }}
+      >
         <Header />
         <Outlet />
-      </article>
-    </section>
+      </div>
+    </div>
   )
 }
