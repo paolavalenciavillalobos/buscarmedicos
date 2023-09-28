@@ -1,15 +1,19 @@
 import {
   DivForTable,
   DivForTitleOnTable,
-  Table
+  Table,
+  TitleForTableDashboard
 } from '@/assets/styles/home/dashboard/tableDashboard'
+import { Link } from 'react-router-dom'
 
 export const TableDashboard = () => {
   return (
     <>
       <DivForTable>
         <DivForTitleOnTable>
-          <p>Últimos usuários cadastrados </p>
+          <TitleForTableDashboard>
+            Últimos usuários cadastrados
+          </TitleForTableDashboard>
           <p>Ver tudo</p>
         </DivForTitleOnTable>
         <Table>

@@ -7,15 +7,24 @@ import {
 import BaseLayout from '@/pages/home/baselayout'
 import Login from '@/pages/login/login'
 import { DashboardMenu } from '@/components/home/dashboard/dashboard'
+import { UsuariosMain } from '@/pages/usuarios/usuariosmain'
+import { PlanosMain } from '@/pages/planos/planosMain'
+import { EspecialidadesMain } from '@/pages/especialidades/especialidadesMain'
+import { NotificationsMain } from '@/pages/notifications/notificationsMain'
+import { FaqMain } from '@/pages/faq/faqMain'
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/LOGIN" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<BaseLayout />}>
           <Route index element={<DashboardMenu />} />
-          <Route path="/logout" element={<h1>SAIR</h1>} />
+          <Route path="/usuarios" element={<UsuariosMain />} />
+          <Route path="/planos" element={<PlanosMain />} />
+          <Route path="/especialidades" element={<EspecialidadesMain />} />
+          <Route path="/notificacoes" element={<NotificationsMain />} />
+          <Route path="/faq" element={<FaqMain />} />
         </Route>
       </Routes>
     </BrowserRouter>

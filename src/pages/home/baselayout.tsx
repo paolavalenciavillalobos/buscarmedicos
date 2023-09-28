@@ -1,20 +1,24 @@
 import { Outlet } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import Frame from '../../assets/images/Frame.png'
-import Remind from '../../assets/images/remind.png'
-import Composition from '../../assets/images/composition.png'
 import Dashboard from '../../assets/images/dashboard.png'
 import RegisterUsers from '../../assets/images/register-users.png'
 import Plans from '../../assets/images/plans.png'
 import Specialities from '../../assets/images/specialities.png'
 import Notification from '../../assets/images/notifications.png'
 import Faq from '../../assets/images/faq.png'
-import { Logo, Menu, MenuText } from '@/assets/styles/home/menu'
+import {
+  BaseDiv,
+  Logo,
+  Menu,
+  MenuText,
+  SecondDiv
+} from '@/assets/styles/home/menu'
 import { Header } from '@/components/user/header'
 
 export default function BaseLayout() {
   return (
-    <div id="baseDiv" style={{ display: 'flex' }}>
+    <BaseDiv>
       <Menu>
         <nav>
           <Logo>
@@ -60,13 +64,10 @@ export default function BaseLayout() {
           </ul>
         </nav>
       </Menu>
-      <div
-        id="secondDivChild"
-        style={{ display: 'flex', flexDirection: 'column', flex: '1' }}
-      >
+      <SecondDiv>
         <Header />
         <Outlet />
-      </div>
-    </div>
+      </SecondDiv>
+    </BaseDiv>
   )
 }

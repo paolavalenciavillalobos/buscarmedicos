@@ -1,13 +1,22 @@
 import styled from 'styled-components'
 
+export const BaseDiv = styled.div`
+  display: flex;
+`
+
+export const SecondDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`
+
 export const Menu = styled.div`
   display: flex;
   flex-direction: column;
-  width: 20%;
-  //min-width: 150px;
+  width: 18%;
   background: #046639;
   position: relative;
-  min-height: 100vh;
+  //min-height: 100vh;
 `
 
 export const Logo = styled.div`

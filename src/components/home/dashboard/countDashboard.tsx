@@ -1,96 +1,92 @@
 import RedCircle from '../../../assets/images/Icone (2).png'
 import GreenCircle from '../../../assets/images/Icone (1).png'
 import BlueCircle from '../../../assets/images/Icone.png'
-import RegisterUsers from '../../../assets/images/register-users.png'
+import EveryUser from '../../../assets/images/every-user.png'
+import PeopleSearchOne from '../../../assets/images/people-search-one.png'
+import YellowIcon from '../../../assets/images/Icone (3).png'
 import {
   BoxDashboard,
   CardDashboard,
   CountDashboardFatherDiv,
-  IconeDashboard
+  IconeDashboard,
+  NumTitle,
+  TitleForCard,
+  TotalNumDiv,
+  TotalTitle
 } from '@/assets/styles/home/dashboard/dasboard'
 
 export const CountDashboard = () => {
   return (
     <>
-      <div style={{ width: '100vh' }}>
+      <div style={{ width: '100%', height: '100%' }}>
         <CountDashboardFatherDiv>
-          <div>Médicos</div>
+          <TitleForCard>Médicos</TitleForCard>
           <BoxDashboard>
             <CardDashboard>
-              <div style={{}}>
-                <img
-                  src={BlueCircle}
-                  style={{ display: 'flex', position: 'relative' }}
-                />
-                <img
-                  src={RegisterUsers}
-                  style={{
-                    display: 'flex',
-                    position: 'absolute',
-                    margin: '0 auto'
-                  }}
-                />
-              </div>
-              <div>
-                <p>Total</p>
-                <p>800</p>
-              </div>
+              <IconeDashboard>
+                <img src={BlueCircle} style={{ position: 'relative' }} />
+                <img src={EveryUser} style={{ position: 'absolute' }} />
+              </IconeDashboard>
+              <TotalNumDiv>
+                <TotalTitle>Total</TotalTitle>
+                <NumTitle>800</NumTitle>
+              </TotalNumDiv>
             </CardDashboard>
             <CardDashboard>
               <IconeDashboard>
                 <img src={GreenCircle} />
-                <img src={RegisterUsers} />
+                <img src={EveryUser} />
               </IconeDashboard>
-              <div>
-                <p>Total</p>
-                <p>800</p>
-              </div>
+              <TotalNumDiv>
+                <TotalTitle>Total</TotalTitle>
+                <NumTitle>800</NumTitle>
+              </TotalNumDiv>
             </CardDashboard>
             <CardDashboard>
-              <div>
+              <IconeDashboard>
                 <img src={RedCircle} />
-                <img src={RegisterUsers} />
-              </div>
-              <div>
-                <p>Total</p>
-                <p>800</p>
-              </div>
+                <img src={EveryUser} />
+              </IconeDashboard>
+              <TotalNumDiv>
+                <TotalTitle>Total</TotalTitle>
+                <NumTitle>800</NumTitle>
+              </TotalNumDiv>
             </CardDashboard>
           </BoxDashboard>
         </CountDashboardFatherDiv>
 
         <CountDashboardFatherDiv>
-          <div>Contratantes</div>
+          <TitleForCard>Contratantes</TitleForCard>
           <BoxDashboard>
             <CardDashboard>
-              <div style={{ display: 'flex' }}>
-                <img src={BlueCircle} />
-                <img src={RegisterUsers} />
-              </div>
-              <div>
-                <p>Total</p>
-                <p>800</p>
-              </div>
+              <IconeDashboard>
+                <img src={YellowIcon} />
+                <img src={PeopleSearchOne} />
+              </IconeDashboard>
+              <TotalNumDiv>
+                <TotalTitle>Total</TotalTitle>
+                <NumTitle>800</NumTitle>
+              </TotalNumDiv>
             </CardDashboard>
             <CardDashboard>
               <IconeDashboard>
                 <img src={GreenCircle} />
-                <img src={RegisterUsers} />
+                <img src={PeopleSearchOne} />
               </IconeDashboard>
-              <div>
-                <p>Total</p>
-                <p>800</p>
-              </div>
+              <TotalNumDiv>
+                <TotalTitle>Total</TotalTitle>
+                <NumTitle>800</NumTitle>
+              </TotalNumDiv>
             </CardDashboard>
             <CardDashboard>
-              <div>
+              <IconeDashboard>
                 <img src={RedCircle} />
-                <img src={RegisterUsers} />
-              </div>
-              <div>
-                <p>Total</p>
-                <p>800</p>
-              </div>
+                <img src={PeopleSearchOne} />
+              </IconeDashboard>
+              <TotalNumDiv>
+                <TotalTitle>Total</TotalTitle>
+                <NumTitle>800</NumTitle>
+              </TotalNumDiv>
             </CardDashboard>
           </BoxDashboard>
         </CountDashboardFatherDiv>

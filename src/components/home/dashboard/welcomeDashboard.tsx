@@ -1,9 +1,13 @@
 import OfficeIcon from '../../../assets/images/office-icon.png'
 import Calendar from '../../../assets/images/calendar.png'
 import {
+  DivForImage,
   ElipseDiv,
   GreenDiv,
-  HeaderCalendarWelcome
+  HeaderCalendarWelcome,
+  SpanCalendar,
+  SubtitleWelcome,
+  WelcomeText
 } from '@/assets/styles/home/dashboard/dasboard'
 import Elipse from '../../../assets/images/Ellipse 149.png'
 
@@ -12,21 +16,21 @@ export const WelcomeDashboard = () => {
     <>
       <GreenDiv>
         <ElipseDiv>
-          <div>
-            <img src={Elipse} />
-            <img src={OfficeIcon} />
-          </div>
+          <DivForImage>
+            <img src={Elipse} style={{ width: '100%', height: '70%' }} />
+            <img src={OfficeIcon} style={{ width: '100%', height: '70%' }} />
+          </DivForImage>
         </ElipseDiv>
         <HeaderCalendarWelcome>
-          <span id="spanCalendar">
+          <SpanCalendar>
             <img src={Calendar} />
             Hora
-          </span>
-          <h3 id="WelcomeText">Seja bem-vindo Nome!</h3>
-          <p id="subtitleWelcome">
+          </SpanCalendar>
+          <WelcomeText>Seja bem-vinda!</WelcomeText>
+          <SubtitleWelcome>
             Neste painel você poderá administrar seu site de forma simples e
             prática.
-          </p>
+          </SubtitleWelcome>
         </HeaderCalendarWelcome>
       </GreenDiv>
     </>
