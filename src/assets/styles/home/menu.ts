@@ -4,7 +4,7 @@ export const Menu = styled.div`
   display: flex;
   flex-direction: column;
   width: 20%;
-  min-width: 150px;
+  //min-width: 150px;
   background: #046639;
   position: relative;
   min-height: 100vh;
@@ -33,7 +33,7 @@ export const MenuText = styled.div`
   /*margin-right: 1%;
   margin-top: 1%;
   margin-bottom: 1%;*/
-  width: 100vh;
+  //width: 100vh;
   cursor: pointer;
   .menu-link {
     text-decoration: none;
@@ -41,7 +41,7 @@ export const MenuText = styled.div`
     display: flex;
     align-items: center;
     padding: 8px;
-    width: 39vh;
+    width: 100%;
     border-radius: 10px;
   }
   .menu-link:hover {

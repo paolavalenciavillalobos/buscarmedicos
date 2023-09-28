@@ -17,9 +17,19 @@ export const CountDashboard = () => {
           <div>Médicos</div>
           <BoxDashboard>
             <CardDashboard>
-              <div style={{ display: 'flex' }}>
-                <img src={BlueCircle} />
-                <img src={RegisterUsers} />
+              <div style={{}}>
+                <img
+                  src={BlueCircle}
+                  style={{ display: 'flex', position: 'relative' }}
+                />
+                <img
+                  src={RegisterUsers}
+                  style={{
+                    display: 'flex',
+                    position: 'absolute',
+                    margin: '0 auto'
+                  }}
+                />
               </div>
               <div>
                 <p>Total</p>
