@@ -38,14 +38,19 @@ export const Table = styled.table`
   overflow: hidden;
   border-collapse: separate;
   border-spacing: 0px 5px;
-  border-radius: 30px;
   text-align: left;
+
+  thead {
+    //border-top-left-radius: 20px;
+    //border-top-right-radius: 20px;
+    border-radius: 10%;
+  }
 
   th,
   td {
     border: none;
     padding-left: 4%;
-    padding-right: 4%;
+    padding-right: 30%;
     padding: 1.5%;
   }
 

@@ -10,8 +10,8 @@ export const MomDiv = styled.div`
 
 export const GreenDiv = styled.div`
   background: #046639;
-  //height: 40vh;
-  width: 35%;
+  width: 55%;
+  height: 100%;
   border-radius: 10px;
   padding: 2%;
 `
@@ -23,13 +23,16 @@ export const ElipseDiv = styled.div`
 
 export const DivForImage = styled.div`
   width: 50%;
-  position: relative & img {
+  position: relative;
+  img {
     position: absolute;
+    bottom: 2%;
   }
 `
 export const HeaderCalendarWelcome = styled.div`
   width: 100%;
   color: #ffff;
+  margin-top: 1.5%;
 `
 
 export const SpanCalendar = styled.span`
@@ -67,7 +70,9 @@ export const CountDashboardFatherDiv = styled.div`
   box-shadow: 0px 7px 30px 0px #bbc0cd66;
   margin-left: 2%;
   border-radius: 20px;
-  //padding: 1%;
+  //width: 100%;
+  //height: 100%;
+  padding: 1%;
 `
 
 export const TitleForCard = styled.p`
@@ -78,7 +83,8 @@ export const TitleForCard = styled.p`
   //line-height: 28px;
   letter-spacing: 0.20000000298023224px;
   text-align: left;
-  //margin: 3%;
+  margin-left: 2%;
+  margin-top: 1%;
 `
 export const BoxDashboard = styled.div`
   display: flex;
@@ -92,11 +98,25 @@ export const CardDashboard = styled.div`
   margin: 1%;
   width: 100%;
   border-radius: 10px;
+  padding: 2%;
 `
 export const IconeDashboard = styled.div`
   display: flex;
   width: 50%;
+  margin-right: 20%;
   align-items: center;
+  position: relative;
+  img {
+    position: absolute;
+    padding-right: 30%;
+  }
+  .circle {
+    width: 150%;
+  }
+  .icon {
+    width: 100%;
+    margin-left: 25%;
+  }
 `
 export const TotalNumDiv = styled.div`
   width: 100%;

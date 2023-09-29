@@ -26,8 +26,10 @@ export const Search = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  margin-right: 2%;
 
   input {
+    padding: 3%;
     position: absolute;
     width: 100%;
     border-radius: 16px;
@@ -45,7 +47,7 @@ export const Search = styled.div`
   img {
     position: absolute;
     left: 90%;
-    height: 40%;
+    height: 60%;
   }
 `
 
@@ -62,6 +64,8 @@ export const MenuSelectFilter = styled.select`
   color: #757575;
   width: 10%;
   height: 100%;
+  margin-right: 2%;
+  padding: 0.8%;
 `
 
 export const GreenButtonForAdd = styled.button`
@@ -76,21 +80,65 @@ export const GreenButtonForAdd = styled.button`
   font-weight: 600;
   line-height: 1.5;
   letter-spacing: 0.2px;
+  padding: 0.8%;
   img {
     width: 8%;
     height: 35%;
+    margin-right: 2%;
   }
 `
 
 export const EditButtonUniversal = styled.button`
   background-color: white;
-  border-radius: 50%;
+  border-radius: 10px;
   border-color: #e0e0e0;
   border-width: 1.3px;
   border-style: solid;
   padding: 2%;
+  margin-right: 4%;
+  box-shadow: 2px 2px 10px 0px #bbc0cd99;
+
   img {
     width: 70%;
-    height: 70%;
+    height: 90%;
+  }
+`
+
+export const DivForTabs = styled.div`
+  height: 5%;
+  width: 100%;
+  margin-bottom: 0%;
+  display: flex;
+  margin-left: 2%;
+`
+export const TabForSearchFilter = styled.div<{ isActive: boolean }>`
+  width: 172.32px;
+  display: flex;
+  height: 64.42px;
+  padding: 18px;
+  border-radius: 16px, 16px, 0px, 0px;
+  gap: 18px;
+  background-color: ${props => (props.isActive ? '#ffffff' : '#f5f5f5')};
+  box-shadow: 0px 0px 25px 0px #a3a3a333;
+  margin-right: 1%;
+  p {
+    font-family: 'Poppins';
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: 0.20000000298023224px;
+    text-align: left;
+    color: #212121;
+    padding-left: 13%;
+  }
+  div {
+    width: 51.13px;
+    height: 28.18px;
+    padding: 4px, 12px, 4px, 12px;
+    border-radius: 100px;
+    gap: 10px;
+
+    background-color: ${props => (props.isActive ? '#046639' : '#B4E08E')};
+    color: ${props => (props.isActive ? '#fffff' : '#212121')};
   }
 `

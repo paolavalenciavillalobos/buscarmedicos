@@ -19,13 +19,15 @@ export const CountDashboard = () => {
   return (
     <>
       <div style={{ width: '100%', height: '100%' }}>
-        <CountDashboardFatherDiv>
+        <CountDashboardFatherDiv
+          style={{ marginTop: '0%', marginBottom: '1.5%' }}
+        >
           <TitleForCard>Médicos</TitleForCard>
           <BoxDashboard>
             <CardDashboard>
               <IconeDashboard>
-                <img src={BlueCircle} style={{ position: 'relative' }} />
-                <img src={EveryUser} style={{ position: 'absolute' }} />
+                <img src={BlueCircle} className="circle" />
+                <img src={EveryUser} className="icon" />
               </IconeDashboard>
               <TotalNumDiv>
                 <TotalTitle>Total</TotalTitle>
@@ -34,8 +36,8 @@ export const CountDashboard = () => {
             </CardDashboard>
             <CardDashboard>
               <IconeDashboard>
-                <img src={GreenCircle} />
-                <img src={EveryUser} />
+                <img src={GreenCircle} className="circle" />
+                <img src={EveryUser} className="icon" />
               </IconeDashboard>
               <TotalNumDiv>
                 <TotalTitle>Total</TotalTitle>
@@ -44,8 +46,8 @@ export const CountDashboard = () => {
             </CardDashboard>
             <CardDashboard>
               <IconeDashboard>
-                <img src={RedCircle} />
-                <img src={EveryUser} />
+                <img src={RedCircle} className="circle" />
+                <img src={EveryUser} className="icon" />
               </IconeDashboard>
               <TotalNumDiv>
                 <TotalTitle>Total</TotalTitle>
@@ -55,13 +57,15 @@ export const CountDashboard = () => {
           </BoxDashboard>
         </CountDashboardFatherDiv>
 
-        <CountDashboardFatherDiv>
+        <CountDashboardFatherDiv
+          style={{ marginTop: '1.5%', marginBottom: '0%' }}
+        >
           <TitleForCard>Contratantes</TitleForCard>
           <BoxDashboard>
             <CardDashboard>
               <IconeDashboard>
-                <img src={YellowIcon} />
-                <img src={PeopleSearchOne} />
+                <img src={YellowIcon} className="circle" />
+                <img src={PeopleSearchOne} className="icon" />
               </IconeDashboard>
               <TotalNumDiv>
                 <TotalTitle>Total</TotalTitle>
@@ -70,8 +74,8 @@ export const CountDashboard = () => {
             </CardDashboard>
             <CardDashboard>
               <IconeDashboard>
-                <img src={GreenCircle} />
-                <img src={PeopleSearchOne} />
+                <img src={GreenCircle} className="circle" />
+                <img src={PeopleSearchOne} className="icon" />
               </IconeDashboard>
               <TotalNumDiv>
                 <TotalTitle>Total</TotalTitle>
@@ -80,8 +84,8 @@ export const CountDashboard = () => {
             </CardDashboard>
             <CardDashboard>
               <IconeDashboard>
-                <img src={RedCircle} />
-                <img src={PeopleSearchOne} />
+                <img src={RedCircle} className="circle" />
+                <img src={PeopleSearchOne} className="icon" />
               </IconeDashboard>
               <TotalNumDiv>
                 <TotalTitle>Total</TotalTitle>

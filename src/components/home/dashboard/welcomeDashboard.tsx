@@ -17,8 +17,8 @@ export const WelcomeDashboard = () => {
       <GreenDiv>
         <ElipseDiv>
           <DivForImage>
-            <img src={Elipse} style={{ width: '100%', height: '70%' }} />
-            <img src={OfficeIcon} style={{ width: '100%', height: '70%' }} />
+            <img src={Elipse} style={{ width: '100%' }} />
+            <img src={OfficeIcon} style={{ width: '90%' }} />
           </DivForImage>
         </ElipseDiv>
         <HeaderCalendarWelcome>

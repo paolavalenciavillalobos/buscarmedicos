@@ -5,21 +5,36 @@ import {
   TitleForTableDashboard
 } from '@/assets/styles/home/dashboard/tableDashboard'
 import {
+  DivForTabs,
   DivMainTitle,
   HeaderOnTable,
   MainTitle,
   MenuSelectFilter,
-  Search
+  Search,
+  TabForSearchFilter
 } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import SearchIcon from '../../assets/images/search.png'
 
-export const UsuariosMain = () => {
+interface Props {
+  isActive: boolean
+}
+
+export const UsuariosMain = ({ isActive }: Props) => {
   return (
     <>
       <div>
         <DivMainTitle>
           <MainTitle>Usuários Cadastrados| Todos</MainTitle>
         </DivMainTitle>
+        <DivForTabs>
+          <TabForSearchFilter isActive={true}>
+            <p>Todos</p>
+            <div>100</div>
+          </TabForSearchFilter>
+          <TabForSearchFilter isActive={false}>
+            <p>Contratante</p> <div>100</div>
+          </TabForSearchFilter>
+        </DivForTabs>
         <DivForTable>
           <HeaderOnTable>
             <Search>

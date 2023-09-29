@@ -3,15 +3,21 @@ import {
   Table
 } from '@/assets/styles/home/dashboard/tableDashboard'
 import {
+  DivForTabs,
   DivMainTitle,
+  EditButtonUniversal,
   GreenButtonForAdd,
   HeaderOnTable,
   MainTitle,
   MenuSelectFilter,
-  Search
+  Search,
+  TabForSearchFilter
 } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import SearchIcon from '../../assets/images/search.png'
 import AddButton from '../../assets/images/add.png'
+import EditButton from '../../assets/images/edit.png'
+import DeleteButton from '../../assets/images/delete.png'
+import VisualizerButton from '../../assets/images/visualize.png'
 
 export const PlanosMain = () => {
   return (
@@ -20,6 +26,15 @@ export const PlanosMain = () => {
         <DivMainTitle>
           <MainTitle>Planos</MainTitle>
         </DivMainTitle>
+        <DivForTabs>
+          <TabForSearchFilter isActive={true}>
+            <p>Todos</p>
+            <div>100</div>
+          </TabForSearchFilter>
+          <TabForSearchFilter isActive={false}>
+            <p>Contratante</p> <div>100</div>
+          </TabForSearchFilter>
+        </DivForTabs>
         <DivForTable>
           <HeaderOnTable>
             <Search>
@@ -50,7 +65,17 @@ export const PlanosMain = () => {
                 <td>Fila 1, Columna 2</td>
                 <td>Fila 1, Columna 3</td>
                 <td>Fila 1, Columna 4</td>
-                <td>Fila 1, Columna 5</td>
+                <td>
+                  <EditButtonUniversal>
+                    <img src={VisualizerButton} />
+                  </EditButtonUniversal>
+                  <EditButtonUniversal>
+                    <img src={EditButton} />
+                  </EditButtonUniversal>
+                  <EditButtonUniversal>
+                    <img src={DeleteButton} />
+                  </EditButtonUniversal>
+                </td>
               </tr>
               <tr>
                 <td>Fila 2, Columna 1</td>
