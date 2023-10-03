@@ -20,7 +20,7 @@ export default function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<BaseLayout />}>
           <Route index element={<DashboardMenu />} />
-          <Route path="/usuarios" element={<UsuariosMain />} />
+          <Route path="/usuarios" element={<UsuariosMain isActive={false} />} />
           <Route path="/planos" element={<PlanosMain />} />
           <Route path="/especialidades" element={<EspecialidadesMain />} />
           <Route path="/notificacoes" element={<NotificationsMain />} />

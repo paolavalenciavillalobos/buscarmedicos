@@ -40,6 +40,14 @@ export const Table = styled.table`
   border-spacing: 0px 5px;
   text-align: left;
 
+  th:first-child {
+    border-radius: 16px 0px 0px 0px;
+  }
+
+  th:last-child {
+    border-radius: 0px 16px 0px 0px;
+  }
+
   thead {
     //border-top-left-radius: 20px;
     //border-top-right-radius: 20px;

@@ -10,19 +10,20 @@ import {
   Box,
   PasswordBox
 } from '@/assets/styles/login'
+import { LoginPost } from '@/config/servicies'
 
 const Login = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
-  /*const navigate = useNavigate()
+  //const navigate = useNavigate()
 
   const handleLoginSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
     const userName = await LoginPost(email, password)
     console.log('user:', userName)
-    navigate('/kanban')
-  }*/
+    //navigate('/')
+  }
 
   return (
     <>
@@ -30,7 +31,7 @@ const Login = () => {
         <Container>
           <Text>Seja bem-vindo</Text>
           <Title>Realize seu login</Title>
-          <form>
+          <form onChange={handleLoginSubmit}>
             <Input>
               <label htmlFor="user">Email</label>
               <input
