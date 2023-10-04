@@ -48,17 +48,10 @@ export const Table = styled.table`
     border-radius: 0px 16px 0px 0px;
   }
 
-  thead {
-    //border-top-left-radius: 20px;
-    //border-top-right-radius: 20px;
-    border-radius: 10%;
-  }
-
   th,
   td {
     border: none;
-    padding-left: 4%;
-    padding-right: 30%;
+    //padding-left: 4%;
     padding: 1.5%;
   }
 

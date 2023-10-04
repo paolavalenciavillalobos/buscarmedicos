@@ -5,8 +5,31 @@ import {
   TitleForTableDashboard
 } from '@/assets/styles/home/dashboard/tableDashboard'
 import { Link } from 'react-router-dom'
+import { GetLastUsers } from '@/config/servicies'
+import { useEffect, useState } from 'react'
+import { TableComponent } from '@/components/table/table'
 
 export const TableDashboard = () => {
+  const HeadColumns = ['Usuário', 'E-mail', 'WhatsApp', 'Tipo de usuário']
+
+  const [userData, setUserData] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData = await GetLastUsers()
+        if (userData) {
+          setUserData(userData.content)
+          console.log(userData.content)
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
   return (
     <>
       <DivForTable>
@@ -16,47 +39,14 @@ export const TableDashboard = () => {
           </TitleForTableDashboard>
           <p>Ver tudo</p>
         </DivForTitleOnTable>
-        <Table>
-          <thead>
-            <tr>
-              <th>Columna 1</th>
-              <th>Columna 2</th>
-              <th>Columna 3</th>
-              <th>Columna 4</th>
-              <th>Columna 5</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Fila 1, Columna 1</td>
-              <td>Fila 1, Columna 2</td>
-              <td>Fila 1, Columna 3</td>
-              <td>Fila 1, Columna 4</td>
-              <td>Fila 1, Columna 5</td>
-            </tr>
-            <tr>
-              <td>Fila 2, Columna 1</td>
-              <td>Fila 2, Columna 2</td>
-              <td>Fila 2, Columna 3</td>
-              <td>Fila 2, Columna 4</td>
-              <td>Fila 2, Columna 5</td>
-            </tr>
-            <tr>
-              <td>Fila 3, Columna 1</td>
-              <td>Fila 3, Columna 2</td>
-              <td>Fila 3, Columna 3</td>
-              <td>Fila 3, Columna 4</td>
-              <td>Fila 3, Columna 5</td>
-            </tr>
-            <tr>
-              <td>Fila 4, Columna 1</td>
-              <td>Fila 4, Columna 2</td>
-              <td>Fila 4, Columna 3</td>
-              <td>Fila 4, Columna 4</td>
-              <td>Fila 4, Columna 5</td>
-            </tr>
-          </tbody>
-        </Table>
+        <TableComponent
+          HeadColumns={HeadColumns}
+          BodyRow={userData.map(user => ({
+            firstname: `${user.firstName} ${user.lastName}`,
+            phone: `${user.phone}`,
+            email: `${user.email}`
+          }))}
+        />
       </DivForTable>
     </>
   )

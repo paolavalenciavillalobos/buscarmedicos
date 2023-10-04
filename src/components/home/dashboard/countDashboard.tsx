@@ -14,8 +14,38 @@ import {
   TotalNumDiv,
   TotalTitle
 } from '@/assets/styles/home/dashboard/dasboard'
+import { GetUsersDashboard } from '@/config/servicies'
+import { useState, useEffect } from 'react'
 
 export const CountDashboard = () => {
+  const [doctorData, setDoctorData] = useState({
+    total: 0,
+    available: 0,
+    unavailable: 0
+  })
+
+  const [contractorData, setContractorData] = useState({
+    total: 0,
+    available: 0,
+    unavailable: 0
+  })
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData = await GetUsersDashboard()
+        if (userData) {
+          setDoctorData(userData.doctor)
+          setContractorData(userData.contractor)
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
   return (
     <>
       <div style={{ width: '100%', height: '100%' }}>
@@ -31,7 +61,7 @@ export const CountDashboard = () => {
               </IconeDashboard>
               <TotalNumDiv>
                 <TotalTitle>Total</TotalTitle>
-                <NumTitle>800</NumTitle>
+                <NumTitle>{doctorData.total}</NumTitle>
               </TotalNumDiv>
             </CardDashboard>
             <CardDashboard>
@@ -41,7 +71,7 @@ export const CountDashboard = () => {
               </IconeDashboard>
               <TotalNumDiv>
                 <TotalTitle>Total</TotalTitle>
-                <NumTitle>800</NumTitle>
+                <NumTitle>{doctorData.available}</NumTitle>
               </TotalNumDiv>
             </CardDashboard>
             <CardDashboard>
@@ -51,7 +81,7 @@ export const CountDashboard = () => {
               </IconeDashboard>
               <TotalNumDiv>
                 <TotalTitle>Total</TotalTitle>
-                <NumTitle>800</NumTitle>
+                <NumTitle>{doctorData.unavailable}</NumTitle>
               </TotalNumDiv>
             </CardDashboard>
           </BoxDashboard>
@@ -69,7 +99,7 @@ export const CountDashboard = () => {
               </IconeDashboard>
               <TotalNumDiv>
                 <TotalTitle>Total</TotalTitle>
-                <NumTitle>800</NumTitle>
+                <NumTitle>{contractorData.total}</NumTitle>
               </TotalNumDiv>
             </CardDashboard>
             <CardDashboard>
@@ -79,7 +109,7 @@ export const CountDashboard = () => {
               </IconeDashboard>
               <TotalNumDiv>
                 <TotalTitle>Total</TotalTitle>
-                <NumTitle>800</NumTitle>
+                <NumTitle>{contractorData.available}</NumTitle>
               </TotalNumDiv>
             </CardDashboard>
             <CardDashboard>
@@ -89,7 +119,7 @@ export const CountDashboard = () => {
               </IconeDashboard>
               <TotalNumDiv>
                 <TotalTitle>Total</TotalTitle>
-                <NumTitle>800</NumTitle>
+                <NumTitle>{contractorData.unavailable}</NumTitle>
               </TotalNumDiv>
             </CardDashboard>
           </BoxDashboard>

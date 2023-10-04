@@ -1,17 +1,29 @@
 import Api from '../Api'
 import { AxiosResponse, isAxiosError } from 'axios'
 
-/*export const GetCards = async () => {
+export const GetUsersDashboard = async () => {
   try {
     const token = localStorage.getItem('token')
-    const cardsFromUser = await Api.get('/api/card', {
+    const usersDashboard = await Api.get('/users/dashboard', {
       headers: { Authorization: token }
     })
-    return cardsFromUser.data
+    return usersDashboard.data
   } catch (error) {
     throw error
   }
-}*/
+}
+
+export const GetLastUsers = async () => {
+  try {
+    const token = localStorage.getItem('token')
+    const usersDashboard = await Api.get('/users', {
+      headers: { Authorization: token }
+    })
+    return usersDashboard.data
+  } catch (error) {
+    throw error
+  }
+}
 
 /*export const UpdateCard = async (
   id: string,
@@ -28,7 +40,7 @@ import { AxiosResponse, isAxiosError } from 'axios'
   }
 }*/
 
-export const DeleteCard = async (id: string) => {
+/*export const DeleteCard = async (id: string) => {
   try {
     const token = localStorage.getItem('token')
     const cardsFromId = await Api.delete(`/api/card/${id}`, {
@@ -38,7 +50,7 @@ export const DeleteCard = async (id: string) => {
   } catch (error) {
     throw error
   }
-}
+}*/
 
 type LoginApi = {
   token: string
@@ -48,18 +60,15 @@ type LoginApi = {
 export const LoginPost = async (email: string, password: string) => {
   try {
     const userData: AxiosResponse<LoginApi> = await Api.post(
-      '/register-controller/login',
-      {
-        email,
-        password
-      }
+      `public/register/login?email=${email}&password=${password}`,
+      {}
     )
 
     const token = userData.data.token
-    const userName = userData.data.name
+    //const userName = userData.data.name
 
     localStorage.setItem('token', token)
-    return userName
+    return token
   } catch (error) {
     if (isAxiosError(error)) {
       if (error.status === 404) {
