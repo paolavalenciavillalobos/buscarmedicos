@@ -43,8 +43,8 @@ export const TableDashboard = () => {
           HeadColumns={HeadColumns}
           BodyRow={userData.map(user => ({
             firstname: `${user.firstName} ${user.lastName}`,
-            phone: `${user.phone}`,
-            email: `${user.email}`
+            email: `${user.email}`,
+            phone: `${user.phone}`
           }))}
         />
       </DivForTable>

@@ -1,7 +1,7 @@
 import { Table } from '@/assets/styles/home/dashboard/tableDashboard'
 import { ReactNode } from 'react'
 
-type TableRow = Record<string, string | number | ReactNode>
+type TableRow = Record<string, string | number | Array<string> | ReactNode>
 
 type TableProps = {
   HeadColumns: string[]
@@ -14,16 +14,16 @@ export const TableComponent = ({ HeadColumns, BodyRow }: TableProps) => {
       <Table>
         <thead>
           <tr>
-            {HeadColumns.map(columnText => (
-              <th>{columnText}</th>
+            {HeadColumns.map((columnText, index) => (
+              <th key={`${index}-th`}>{columnText}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {BodyRow.map(information => (
-            <tr>
-              {Object.values(information).map(cell => (
-                <td>{cell}</td>
+          {BodyRow.map((information, index) => (
+            <tr key={`${index}-tr`}>
+              {Object.values(information).map((cell, index) => (
+                <td key={`${index}-td`}>{cell}</td>
               ))}
             </tr>
           ))}
