@@ -8,7 +8,7 @@ export const DivForTable = styled.div`
   //width: 100%;
 `
 export const DivForTitleOnTable = styled.div`
-  height: 12%;
+  //height: 12%;
   margin: 1%;
   padding: 1%;
   display: flex;

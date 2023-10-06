@@ -4,13 +4,13 @@ import {
   Table,
   TitleForTableDashboard
 } from '@/assets/styles/home/dashboard/tableDashboard'
-import { Link } from 'react-router-dom'
-import { GetLastUsers } from '@/config/servicies'
+
 import { useEffect, useState } from 'react'
 import { TableComponent } from '@/components/table/table'
+import { GetSpecialties } from '@/config/specialities'
 
-export const TableDashboard = () => {
-  const HeadColumns = ['Usuário', 'E-mail', 'WhatsApp', 'Tipo de usuário']
+export const EspecialidadesTable = () => {
+  const HeadColumns = ['Nome especialidade', 'Situação', 'Ações']
 
   const [userData, setUserData] = useState<Array<UserData>>([])
   const [userDataProcessed, setUserDataProcessed] = useState<
@@ -20,16 +20,15 @@ export const TableDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userData = await GetLastUsers()
+        const userData = await GetSpecialties()
+        console.log(userData)
         if (userData) {
           setUserData(userData.content)
           let dataTemp: DataTempItem[] = []
           userData.content.forEach((item: UserData) => {
             dataTemp.push({
-              user: item.name,
-              email: item.email,
-              whatsapp: item.phone,
-              userType: item.profiles.length > 0 ? item.profiles[0].name : ''
+              specialty:
+                item.specialties.length > 0 ? item.specialties[0].name : ''
             })
           })
           setUserDataProcessed(dataTemp)

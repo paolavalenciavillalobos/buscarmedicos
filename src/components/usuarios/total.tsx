@@ -13,7 +13,10 @@ export const TableDashboard = () => {
     'Tipo de usuário'
   ]
 
-  const [userData, setUserData] = useState([])
+  const [userData, setUserData] = useState<Array<UserData>>([])
+  const [userDataProcessed, setUserDataProcessed] = useState<
+    Array<DataTempItem>
+  >([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +24,20 @@ export const TableDashboard = () => {
         const userData = await GetLastUsers()
         if (userData) {
           setUserData(userData.content)
+          let dataTemp: DataTempItem[] = []
+          userData.content.forEach((item: UserData) => {
+            dataTemp.push({
+              user: item.name,
+              email: item.email,
+              whatsapp: item.phone,
+              specialty:
+                item.specialties.length > 0 ? item.specialties[0].name : '',
+              city: item?.address?.city,
+              uf: item?.address?.uf,
+              userType: item.profiles.length > 0 ? item.profiles[0].name : ''
+            })
+          })
+          setUserDataProcessed(dataTemp)
           console.log(userData.content)
         }
       } catch (error) {
@@ -33,14 +50,7 @@ export const TableDashboard = () => {
 
   return (
     <>
-      <TableComponent
-        HeadColumns={HeadColumns}
-        BodyRow={userData.map(user => ({
-          firstname: `${user.firstName} ${user.lastName}`,
-          email: `${user.email}`,
-          phone: `${user.phone}`
-        }))}
-      />
+      <TableComponent HeadColumns={HeadColumns} BodyRow={userDataProcessed} />
     </>
   )
 }

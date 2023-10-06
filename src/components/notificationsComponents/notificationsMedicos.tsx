@@ -1,8 +1,8 @@
-import { GetLastUsers } from '@/config/servicies'
 import { useEffect, useState } from 'react'
 import { TableComponent } from '@/components/table/table'
+import { GetNotifications } from '@/config/notificationsServices'
 
-export const MedicosUsers = () => {
+export const NotificationsMedicos = () => {
   const HeadColumns = [
     'Usuário',
     'E-mail',
@@ -22,7 +22,8 @@ export const MedicosUsers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userData = await GetLastUsers()
+        const userData = await GetNotifications()
+        console.log(userData)
 
         if (userData && userData.content) {
           const medicoData = userData.content.filter((user: User) =>
