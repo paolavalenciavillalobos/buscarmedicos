@@ -10,6 +10,7 @@ import {
 } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import SearchIcon from '../../assets/images/search.png'
 import { NotificationsMedicos } from '@/components/notificationsComponents/notificationsMedicos'
+import { NotificationsContratantes } from '@/components/notificationsComponents/notificationsContratantes'
 
 interface Props {
   isActive: boolean
@@ -41,7 +42,7 @@ export const NotificationsMain = () => {
               <img src={SearchIcon} alt="search" />
             </Search>
           </HeaderOnTable>
-          <NotificationsMedicos />
+          <NotificationsContratantes />
         </DivForTable>
       </div>
     </>

@@ -11,3 +11,22 @@ export const GetSpecialties = async () => {
     throw error
   }
 }
+
+type datatypo = {
+  name: string
+  enabled: boolean
+}
+
+export const createPost = async (data: datatypo) => {
+  console.log(data)
+  try {
+    const userData = await Api.post('/specialties', data, {
+      headers: {
+        Authorization: localStorage.getItem('token') ?? ''
+      }
+    })
+    return userData.data
+  } catch (error) {
+    throw error
+  }
+}

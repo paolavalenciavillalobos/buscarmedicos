@@ -12,6 +12,7 @@ import { PlanosMain } from '@/pages/planos/planosMain'
 import { EspecialidadesMain } from '@/pages/especialidades/especialidadesMain'
 import { NotificationsMain } from '@/pages/notifications/notificationsMain'
 import { FaqMain } from '@/pages/faq/faqMain'
+import { SpecialtiesCreatePage } from '@/pages/especialidades/specialitiesPages/specialitiesCreate'
 
 export default function Router() {
   return (
@@ -23,6 +24,10 @@ export default function Router() {
           <Route path="/usuarios" element={<UsuariosMain isActive={false} />} />
           <Route path="/planos" element={<PlanosMain />} />
           <Route path="/especialidades" element={<EspecialidadesMain />} />
+          <Route
+            path="/especialidades-criar"
+            element={<SpecialtiesCreatePage />}
+          />
           <Route path="/notificacoes" element={<NotificationsMain />} />
           <Route path="/faq" element={<FaqMain />} />
         </Route>

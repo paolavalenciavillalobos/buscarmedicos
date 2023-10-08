@@ -1,20 +1,18 @@
+import {
+  DivForTable,
+  DivForTitleOnTable,
+  Table,
+  TitleForTableDashboard
+} from '@/assets/styles/home/dashboard/tableDashboard'
+
 import { useEffect, useState } from 'react'
 import { TableComponent } from '@/components/table/table'
 import { GetNotifications } from '@/config/notificationsServices'
 
-export const NotificationsMedicos = () => {
-  const HeadColumns = [
-    'Usuário',
-    'E-mail',
-    'WhatsApp',
-    'Especialidade',
-    'Cidade',
-    'Estado',
-    'Tipo de usuário'
-  ]
+export const NotificationsContratantes = () => {
+  const HeadColumns = ['Nome especialidade', 'Situação', 'Ações']
 
-  const [medicoData, setMedicoData] = useState<Array<UserData>>([])
-
+  const [userData, setUserData] = useState<Array<UserData>>([])
   const [userDataProcessed, setUserDataProcessed] = useState<
     Array<DataTempItem>
   >([])
@@ -24,30 +22,18 @@ export const NotificationsMedicos = () => {
       try {
         const userData = await GetNotifications()
         console.log(userData)
-
-        if (userData && userData.content) {
-          const medicoData = userData.content.filter((user: User) =>
-            user.profiles.some(profile => profile.name === 'MEDICO')
-          )
-
-          setMedicoData(medicoData)
-
+        if (Array.isArray(userData)) {
+          // Verifica si userData es un array antes de acceder a su contenido
+          setUserData(userData)
           let dataTemp: DataTempItem[] = []
-          medicoData.forEach((item: UserData) => {
+          userData.forEach((item: UserData) => {
             dataTemp.push({
-              user: item.name,
-              email: item.email,
-              whatsapp: item.phone,
-              specialty:
-                item.specialties.length > 0 ? item.specialties[0].name : '',
-              city: item?.address?.city,
-              uf: item?.address?.uf,
-              userType: item.profiles.length > 0 ? item.profiles[0].name : ''
+              createdAt: item.createdAt,
+              title: item.title
             })
           })
-
           setUserDataProcessed(dataTemp)
-          console.log(userData.content)
+          console.log(userData)
         }
       } catch (error) {
         console.error('Error fetching data:', error)

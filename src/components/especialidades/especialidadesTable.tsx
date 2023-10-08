@@ -22,17 +22,18 @@ export const EspecialidadesTable = () => {
       try {
         const userData = await GetSpecialties()
         console.log(userData)
-        if (userData) {
-          setUserData(userData.content)
+        if (Array.isArray(userData)) {
+          // Verifica si userData es un array antes de acceder a su contenido
+          setUserData(userData)
           let dataTemp: DataTempItem[] = []
-          userData.content.forEach((item: UserData) => {
+          userData.forEach((item: UserData) => {
             dataTemp.push({
-              specialty:
-                item.specialties.length > 0 ? item.specialties[0].name : ''
+              name: item.name,
+              enabled: item.enabled
             })
           })
           setUserDataProcessed(dataTemp)
-          console.log(userData.content)
+          console.log(userData)
         }
       } catch (error) {
         console.error('Error fetching data:', error)

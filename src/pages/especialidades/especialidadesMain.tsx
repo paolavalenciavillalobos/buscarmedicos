@@ -6,8 +6,9 @@ import {
   Search
 } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import SearchIcon from '../../assets/images/search.png'
-import { MedicosUsers } from '@/components/usuarios/medicos'
+import { GreenButtonForAdd } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import { EspecialidadesTable } from '@/components/especialidades/especialidadesTable'
+import { Link } from 'react-router-dom'
 
 export const EspecialidadesMain = () => {
   return (
@@ -25,6 +26,9 @@ export const EspecialidadesMain = () => {
               />
               <img src={SearchIcon} alt="search" />
             </Search>
+            <GreenButtonForAdd>
+              <Link to={'/especialidades-criar'}>nova especialidade</Link>
+            </GreenButtonForAdd>
           </HeaderOnTable>
           <EspecialidadesTable />
         </DivForTable>
