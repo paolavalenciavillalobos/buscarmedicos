@@ -8,9 +8,10 @@ import {
 import { useEffect, useState } from 'react'
 import { TableComponent } from '@/components/table/table'
 import { GetSpecialties } from '@/config/specialities'
+import { Link } from 'react-router-dom'
 
 export const EspecialidadesTable = () => {
-  const HeadColumns = ['Nome especialidade', 'Situação', 'Ações']
+  const HeadColumns = ['Nome especialidade', 'Situação']
 
   const [userData, setUserData] = useState<Array<UserData>>([])
   const [userDataProcessed, setUserDataProcessed] = useState<
@@ -29,7 +30,8 @@ export const EspecialidadesTable = () => {
           userData.forEach((item: UserData) => {
             dataTemp.push({
               name: item.name,
-              enabled: item.enabled
+              enabled: item.enabled,
+              id: item.id
             })
           })
           setUserDataProcessed(dataTemp)
@@ -52,7 +54,15 @@ export const EspecialidadesTable = () => {
           </TitleForTableDashboard>
           <p>Ver tudo</p>
         </DivForTitleOnTable>
-        <TableComponent HeadColumns={HeadColumns} BodyRow={userDataProcessed} />
+        <TableComponent
+          HeadColumns={HeadColumns}
+          BodyRow={userDataProcessed}
+          renderAdditionalColumn={item => (
+            <Link to={`/especialidades/${item.id}`} className="edit-button">
+              Editar
+            </Link>
+          )}
+        />
       </DivForTable>
     </>
   )

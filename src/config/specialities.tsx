@@ -18,7 +18,7 @@ type datatypo = {
 }
 
 export const createPost = async (data: datatypo) => {
-  console.log(data)
+  //console.log(data)
   try {
     const userData = await Api.post('/specialties', data, {
       headers: {
@@ -26,6 +26,19 @@ export const createPost = async (data: datatypo) => {
       }
     })
     return userData.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const UpdateSpecialties = async (id: string, data: datatypo) => {
+  console.log(data)
+  try {
+    const token = localStorage.getItem('token')
+    const updateData = await Api.put(`/specialties/${id}`, data, {
+      headers: { Authorization: token }
+    })
+    return updateData.data
   } catch (error) {
     throw error
   }

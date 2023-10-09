@@ -13,6 +13,11 @@ import { EspecialidadesMain } from '@/pages/especialidades/especialidadesMain'
 import { NotificationsMain } from '@/pages/notifications/notificationsMain'
 import { FaqMain } from '@/pages/faq/faqMain'
 import { SpecialtiesCreatePage } from '@/pages/especialidades/specialitiesPages/specialitiesCreate'
+import { CreateFaqs } from '@/components/faq/createFaq'
+import { EditSpecialties } from '@/components/especialidades/editSpecialties'
+import { CreateNotifications } from '@/components/notificationsComponents/createNotifications'
+import { EditNotifications } from '@/components/notificationsComponents/editNotifications'
+import { EditQuestions } from '@/components/faq/editFaq'
 
 export default function Router() {
   return (
@@ -28,8 +33,13 @@ export default function Router() {
             path="/especialidades-criar"
             element={<SpecialtiesCreatePage />}
           />
+          <Route path="/especialidades/:id" element={<EditSpecialties />} />
           <Route path="/notificacoes" element={<NotificationsMain />} />
+          <Route path="/notificacoes-criar" element={<CreateNotifications />} />
+          <Route path="/notificacoes/:id" element={<EditNotifications />} />
           <Route path="/faq" element={<FaqMain />} />
+          <Route path="/faq-criar" element={<CreateFaqs />} />
+          <Route path="/faq/:id" element={<EditQuestions />} />
         </Route>
       </Routes>
     </BrowserRouter>

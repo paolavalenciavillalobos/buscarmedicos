@@ -6,24 +6,6 @@ export const CreateSpecialties = () => {
   const [name, setName] = useState<string>('')
   const [enabled, setEnabled] = useState<boolean>(false)
 
-  //const navigate = useNavigate()
-
-  /*const createPost = async (data: CreateType): Promise<CardsType> => {
-      console.log(data)
-      try {
-        //const token = localStorage.getItem("token")
-        const userData = await Api.post("api/card", data, {
-          headers: {
-            'Authorization': localStorage.getItem('token') ?? ''
-          }
-        })
-        return userData.data
-
-      } catch (error) {
-        throw error;
-      }
-    };*/
-
   const handleLoginSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
     // Crear el objeto de datos a enviar al servidor

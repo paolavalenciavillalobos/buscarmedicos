@@ -2,6 +2,7 @@ import { DivForTable } from '@/assets/styles/home/dashboard/tableDashboard'
 import {
   DivForTabs,
   DivMainTitle,
+  GreenButtonForAdd,
   HeaderOnTable,
   MainTitle,
   MenuSelectFilter,
@@ -11,6 +12,7 @@ import {
 import SearchIcon from '../../assets/images/search.png'
 import { NotificationsMedicos } from '@/components/notificationsComponents/notificationsMedicos'
 import { NotificationsContratantes } from '@/components/notificationsComponents/notificationsContratantes'
+import { Link } from 'react-router-dom'
 
 interface Props {
   isActive: boolean
@@ -41,6 +43,9 @@ export const NotificationsMain = () => {
               />
               <img src={SearchIcon} alt="search" />
             </Search>
+            <GreenButtonForAdd>
+              <Link to={'/notificacoes-criar'}>Nova notificação </Link>
+            </GreenButtonForAdd>
           </HeaderOnTable>
           <NotificationsContratantes />
         </DivForTable>

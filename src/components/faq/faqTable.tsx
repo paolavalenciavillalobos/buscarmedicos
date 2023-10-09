@@ -7,10 +7,11 @@ import {
 
 import { useEffect, useState } from 'react'
 import { TableComponent } from '@/components/table/table'
-import { GetNotifications } from '@/config/notificationsServices'
+import { GetQuestions } from '@/config/faqServices'
+import { Link } from 'react-router-dom'
 
-export const NotificationsContratantes = () => {
-  const HeadColumns = ['Titulo', 'Data de envio', 'Ações']
+export const FaqMedicos = () => {
+  const HeadColumns = ['Titulo', 'Ações']
 
   const [userData, setUserData] = useState<Array<UserData>>([])
   const [userDataProcessed, setUserDataProcessed] = useState<
@@ -20,7 +21,7 @@ export const NotificationsContratantes = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userData = await GetNotifications()
+        const userData = await GetQuestions()
         console.log(userData)
         if (Array.isArray(userData)) {
           // Verifica si userData es un array antes de acceder a su contenido
@@ -29,7 +30,7 @@ export const NotificationsContratantes = () => {
           userData.forEach((item: UserData) => {
             dataTemp.push({
               title: item.title,
-              sendingDate: item.sendingDate
+              id: item.id
             })
           })
           setUserDataProcessed(dataTemp)
@@ -45,7 +46,15 @@ export const NotificationsContratantes = () => {
 
   return (
     <>
-      <TableComponent HeadColumns={HeadColumns} BodyRow={userDataProcessed} />
+      <TableComponent
+        HeadColumns={HeadColumns}
+        BodyRow={userDataProcessed}
+        renderAdditionalColumn={item => (
+          <Link to={`/faq/${item.id}`} className="edit-button">
+            Editar
+          </Link>
+        )}
+      />
     </>
   )
 }

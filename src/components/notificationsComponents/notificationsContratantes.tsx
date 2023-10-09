@@ -8,9 +8,10 @@ import {
 import { useEffect, useState } from 'react'
 import { TableComponent } from '@/components/table/table'
 import { GetNotifications } from '@/config/notificationsServices'
+import { Link } from 'react-router-dom'
 
 export const NotificationsContratantes = () => {
-  const HeadColumns = ['Nome especialidade', 'Situação', 'Ações']
+  const HeadColumns = ['Titulo', 'Data de envio', 'Ações']
 
   const [userData, setUserData] = useState<Array<UserData>>([])
   const [userDataProcessed, setUserDataProcessed] = useState<
@@ -28,8 +29,9 @@ export const NotificationsContratantes = () => {
           let dataTemp: DataTempItem[] = []
           userData.forEach((item: UserData) => {
             dataTemp.push({
-              createdAt: item.createdAt,
-              title: item.title
+              title: item.title,
+              sendingDate: item.sendingDate,
+              id: item.id
             })
           })
           setUserDataProcessed(dataTemp)
@@ -45,7 +47,15 @@ export const NotificationsContratantes = () => {
 
   return (
     <>
-      <TableComponent HeadColumns={HeadColumns} BodyRow={userDataProcessed} />
+      <TableComponent
+        HeadColumns={HeadColumns}
+        BodyRow={userDataProcessed}
+        renderAdditionalColumn={item => (
+          <Link to={`/notificacoes/${item.id}`} className="edit-button">
+            Editar
+          </Link>
+        )}
+      />
     </>
   )
 }

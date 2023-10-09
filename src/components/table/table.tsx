@@ -6,9 +6,14 @@ type TableRow = Record<string, string | number | Array<string> | ReactNode>
 type TableProps = {
   HeadColumns: string[]
   BodyRow: TableRow[]
+  renderAdditionalColumn?: (item: TableRow) => ReactNode
 }
 
-export const TableComponent = ({ HeadColumns, BodyRow }: TableProps) => {
+export const TableComponent = ({
+  HeadColumns,
+  BodyRow,
+  renderAdditionalColumn
+}: TableProps) => {
   return (
     <>
       <Table>
@@ -17,6 +22,7 @@ export const TableComponent = ({ HeadColumns, BodyRow }: TableProps) => {
             {HeadColumns.map((columnText, index) => (
               <th key={`${index}-th`}>{columnText}</th>
             ))}
+            {renderAdditionalColumn && <th>Acciones</th>}
           </tr>
         </thead>
         <tbody>
@@ -25,6 +31,9 @@ export const TableComponent = ({ HeadColumns, BodyRow }: TableProps) => {
               {Object.values(information).map((cell, index) => (
                 <td key={`${index}-td`}>{cell}</td>
               ))}
+              {renderAdditionalColumn && (
+                <td>{renderAdditionalColumn(information, index)}</td>
+              )}
             </tr>
           ))}
         </tbody>
