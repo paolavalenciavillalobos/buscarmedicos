@@ -32,7 +32,7 @@ export const TableComponent = ({
                 <td key={`${index}-td`}>{cell}</td>
               ))}
               {renderAdditionalColumn && (
-                <td>{renderAdditionalColumn(information, index)}</td>
+                <td>{renderAdditionalColumn(information)}</td>
               )}
             </tr>
           ))}

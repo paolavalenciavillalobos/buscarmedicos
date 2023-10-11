@@ -111,7 +111,7 @@ export const DivForTabs = styled.div`
   display: flex;
   margin-left: 2%;
 `
-export const TabForSearchFilter = styled.div<{ isActive: boolean }>`
+export const TabForSearchFilter = styled.button<{ isActive: boolean }>`
   width: 172.32px;
   display: flex;
   height: 64.42px;
