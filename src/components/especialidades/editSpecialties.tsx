@@ -1,57 +1,70 @@
-import { GetSpecialties, UpdateSpecialties } from '@/config/specialities'
-import { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { GetSpecialties, UpdateSpecialties } from '../../config/specialities' // Reemplaza con las funciones de tu API
 
 export const EditSpecialties = () => {
   const { id } = useParams()
-
-  const [name, setName] = useState('')
-  const [enabled, setEnabled] = useState(false)
-  const [isError, setIsError] = useState(false)
+  const [specialty, setSpecialty] = useState({ name: '', enabled: false })
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await GetSpecialties(id)
-
-        if (response) {
-          setName(response.name)
-          setEnabled(response.enabled)
+        if (response.content) {
+          const foundSpecialty = response.content.find(
+            item => item.id === Number(id)
+          )
+          if (foundSpecialty) {
+            setSpecialty(foundSpecialty)
+          } else {
+            console.error(`Specialty with id ${id} not found`)
+          }
+        } else {
+          console.error('Invalid response data:', response)
         }
       } catch (error) {
         console.error('Error fetching data:', error)
-        setIsError(true)
       }
     }
 
     fetchData()
   }, [id])
 
-  const handleSubmit = async event => {
-    event.preventDefault()
-
-    try {
-      await UpdateSpecialties(id, { name, enabled })
-    } catch (error) {
-      console.error('Error updating data:', error)
-    }
+  const handleNameChange = event => {
+    setSpecialty({ ...specialty, name: event.target.value })
   }
 
-  if (isError) {
-    return <p>Error loading data.</p>
+  const handleEnabledChange = () => {
+    setSpecialty({ ...specialty, enabled: !specialty.enabled })
+  }
+
+  const handleUpdate = async () => {
+    try {
+      const updatedSpecialty = {
+        id: Number(id),
+        name: specialty.name,
+        enabled: specialty.enabled
+      }
+
+      await UpdateSpecialties(id, updatedSpecialty) // Actualiza la especialidad con los nuevos datos
+      alert('Especialidad actualizada correctamente')
+    } catch (error) {
+      console.error('Error updating data:', error)
+      alert('Error al actualizar la especialidad')
+    }
   }
 
   return (
     <div>
-      <h3>Edit Specialtie</h3>
-      <form onSubmit={handleSubmit}>
+      <h2>Edit Speciality</h2>
+      <form>
         <div>
           <label htmlFor="name">Name:</label>
           <input
             type="text"
             id="name"
-            value={name}
-            onChange={e => setName(e.target.value)}
+            value={specialty.name}
+            onChange={handleNameChange}
           />
         </div>
         <div>
@@ -59,12 +72,14 @@ export const EditSpecialties = () => {
           <input
             type="checkbox"
             id="enabled"
-            checked={enabled}
-            onChange={e => setEnabled(e.target.checked)}
+            checked={specialty.enabled}
+            onChange={handleEnabledChange}
           />
         </div>
         <div>
-          <button type="submit">Save Changes</button>
+          <button type="button" onClick={handleUpdate}>
+            Save Changes
+          </button>
         </div>
       </form>
     </div>

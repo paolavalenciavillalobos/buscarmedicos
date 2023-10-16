@@ -118,6 +118,7 @@ export const TabForSearchFilter = styled.button<{ isActive: boolean }>`
   padding: 18px;
   border-radius: 16px, 16px, 0px, 0px;
   gap: 18px;
+  border: 0%;
   background-color: ${props => (props.isActive ? '#ffffff' : '#f5f5f5')};
   box-shadow: 0px 0px 25px 0px #a3a3a333;
   margin-right: 1%;

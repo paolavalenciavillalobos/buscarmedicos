@@ -34,14 +34,14 @@ export const MedicosUsers = () => {
           let dataTemp: DataTempItem[] = []
           medicoData.forEach((item: UserData) => {
             dataTemp.push({
-              user: item.name,
+              user: item.firstName,
               email: item.email,
               whatsapp: item.phone,
               specialty:
-                item.specialties.length > 0 ? item.specialties[0].name : '',
+                item.specialties.length > 0 ? item.specialties[0].name : '-',
               city: item?.address?.city,
               uf: item?.address?.uf,
-              userType: item.profiles.length > 0 ? item.profiles[0].name : ''
+              userType: item.profiles.length > 0 ? item.profiles[0].name : '-'
             })
           })
 

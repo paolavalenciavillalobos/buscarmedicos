@@ -1,6 +1,16 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createPost } from '@/config/specialities'
+import {
+  BodyForForm,
+  BoxForForm,
+  ButtonInputsEditCreate,
+  InputDados,
+  TitleForForm,
+  TitleEditCreate,
+  DivForTitle,
+  BackButton
+} from '@/assets/styles/inputs/editCreate'
 
 export const CreateSpecialties = () => {
   const [name, setName] = useState<string>('')
@@ -21,25 +31,37 @@ export const CreateSpecialties = () => {
 
   return (
     <>
+      <DivForTitle>
+        <BackButton>+</BackButton>
+        <TitleEditCreate> Nova especialidade</TitleEditCreate>
+      </DivForTitle>
       <form onSubmit={handleLoginSubmit}>
-        <h3>New</h3>
-        <label htmlFor="title">Nome</label>
-        <p>{name}</p>
-        <input
-          id="title"
-          type="text"
-          value={name}
-          onChange={e => setName(e.target.value)}
-        />
-        <label htmlFor="description">ativo</label> <p>{enabled}</p>
-        <label htmlFor="enabled">Activo</label>
-        <input
-          id="enabled"
-          type="checkbox"
-          checked={enabled}
-          onChange={e => setEnabled(e.target.checked)} // Actualiza el estado cuando el checkbox cambie
-        />
-        <button type="submit">add new specialtie</button>
+        <BodyForForm>
+          <TitleForForm>Dados da especialidade</TitleForForm>
+          <BoxForForm>
+            <InputDados>
+              <label htmlFor="title">Nome</label>
+              <p>{name}</p>
+              <input
+                id="title"
+                type="text"
+                value={name}
+                onChange={e => setName(e.target.value)}
+              />
+            </InputDados>
+            <InputDados>
+              <label htmlFor="description">ativo</label> <p>{enabled}</p>
+              <label htmlFor="enabled">Activo</label>
+              <input
+                id="enabled"
+                type="checkbox"
+                checked={enabled}
+                onChange={e => setEnabled(e.target.checked)} // Actualiza el estado cuando el checkbox cambie
+              />
+            </InputDados>
+          </BoxForForm>
+          <ButtonInputsEditCreate type="submit">Salvar</ButtonInputsEditCreate>
+        </BodyForForm>
       </form>
     </>
   )

@@ -1,69 +1,90 @@
-import {
-  DivForTable,
-  DivForTitleOnTable,
-  Table,
-  TitleForTableDashboard
-} from '@/assets/styles/home/dashboard/tableDashboard'
+import { ReactNode, useEffect, useState } from 'react'
+import { TableComponent } from '../table/table'
+import EditButton from '../../assets/images/edit.png'
+import DeleteButton from '../../assets/images/delete.png'
+import VisualizerButton from '../../assets/images/visualize.png'
 
-import { useEffect, useState } from 'react'
-import { TableComponent } from '@/components/table/table'
-import { GetSpecialties } from '@/config/specialities'
-import { Link } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { DeleteSpecialties, GetSpecialties } from '@/config/specialities'
+import { EditButtonUniversal } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 
-export const EspecialidadesTable = () => {
-  const HeadColumns = ['Nome especialidade', 'Situação']
+type SpecialtiesTypo = {
+  id?: string
+  name: string
+  enabled: ReactNode
+  actions: ReactNode
+}
 
-  const [userData, setUserData] = useState<Array<UserData>>([])
-  const [userDataProcessed, setUserDataProcessed] = useState<
-    Array<DataTempItem>
-  >([])
+export const SpecialtiesTable = () => {
+  const [specialties, setSpecialties] = useState<SpecialtiesTypo[]>([])
+
+  const tableColumns = ['Nome', 'Situação', 'Ações']
+
+  const navigate = useNavigate()
+
+  const handleDelete = async (id: string) => {
+    try {
+      await DeleteSpecialties(id)
+      setSpecialties(prevSpecialties =>
+        prevSpecialties.filter(item => item.id !== id)
+      )
+    } catch (error) {
+      console.error('Error deleting specialty:', error)
+    }
+  }
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userData = await GetSpecialties()
-        console.log(userData)
-        if (Array.isArray(userData)) {
-          // Verifica si userData es un array antes de acceder a su contenido
-          setUserData(userData)
-          let dataTemp: DataTempItem[] = []
-          userData.forEach((item: UserData) => {
-            dataTemp.push({
-              name: item.name,
-              enabled: item.enabled,
-              id: item.id
-            })
-          })
-          setUserDataProcessed(dataTemp)
-          console.log(userData)
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      }
+    const fetchSpecialties = async () => {
+      const result = await GetSpecialties()
+
+      console.log(result.content)
+      const specialtiesFormatted = result?.content.reduce(
+        (accumulator, currentValue) => {
+          const id = currentValue.id
+          console.log(id)
+          const specialtiesTable = {
+            //id: currentValue.id,
+            name: currentValue.name ? currentValue.name : '-',
+
+            enabled: (
+              <div>
+                <input type="checkbox" checked={currentValue.enabled} />
+                <label>{currentValue.enabled ? 'Ativo' : 'Inativo'} </label>
+              </div>
+            ),
+            actions: (
+              <div>
+                <EditButtonUniversal
+                  onClick={() => navigate(`visualizar/${currentValue.id}`)}
+                >
+                  <img src={VisualizerButton} />
+                </EditButtonUniversal>
+                <EditButtonUniversal
+                  onClick={() => navigate(`edit/${currentValue.id}`)}
+                >
+                  <img src={EditButton} />
+                </EditButtonUniversal>
+                <EditButtonUniversal onClick={() => handleDelete(id)}>
+                  <img src={DeleteButton} />
+                </EditButtonUniversal>
+              </div>
+            )
+          }
+          console.log(specialties)
+          return [...accumulator, specialtiesTable]
+        },
+        [] as SpecialtiesTypo[]
+      )
+
+      setSpecialties(specialtiesFormatted ?? [])
     }
 
-    fetchData()
-  }, [])
+    fetchSpecialties()
+  }, [navigate])
 
   return (
     <>
-      <DivForTable>
-        <DivForTitleOnTable>
-          <TitleForTableDashboard>
-            Últimos usuários cadastrados
-          </TitleForTableDashboard>
-          <p>Ver tudo</p>
-        </DivForTitleOnTable>
-        <TableComponent
-          HeadColumns={HeadColumns}
-          BodyRow={userDataProcessed}
-          renderAdditionalColumn={item => (
-            <Link to={`/especialidades/${item.id}`} className="edit-button">
-              Editar
-            </Link>
-          )}
-        />
-      </DivForTable>
+      <TableComponent HeadColumns={tableColumns} BodyRow={specialties} />
     </>
   )
 }

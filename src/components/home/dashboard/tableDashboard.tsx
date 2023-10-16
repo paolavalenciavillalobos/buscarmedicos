@@ -5,7 +5,7 @@ import {
   TitleForTableDashboard
 } from '@/assets/styles/home/dashboard/tableDashboard'
 import { Link } from 'react-router-dom'
-import { GetLastUsers } from '@/config/servicies'
+import { GetLastUsers, GetLastUsersDashboard } from '@/config/servicies'
 import { useEffect, useState } from 'react'
 import { TableComponent } from '@/components/table/table'
 
@@ -20,7 +20,7 @@ export const TableDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userData = await GetLastUsers()
+        const userData = await GetLastUsersDashboard()
         if (userData) {
           setUserData(userData.content)
           let dataTemp: DataTempItem[] = []

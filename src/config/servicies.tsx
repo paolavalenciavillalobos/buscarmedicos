@@ -13,10 +13,47 @@ export const GetUsersDashboard = async () => {
   }
 }
 
-export const GetLastUsers = async () => {
+export const GetUsersCount = async () => {
   try {
     const token = localStorage.getItem('token')
-    const usersDashboard = await Api.get('/users', {
+    const usersDashboard = await Api.get('/users/count', {
+      headers: { Authorization: token }
+    })
+    return usersDashboard.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const GetLastUsersDashboard = async () => {
+  try {
+    const token = localStorage.getItem('token')
+    const usersDashboard = await Api.get('/users?page=1&size=10', {
+      headers: { Authorization: token }
+    })
+    return usersDashboard.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const GetLastUsers = async (
+  searchTerm: string | null,
+  pagina: number,
+  elementosPorPagina: number
+) => {
+  try {
+    let pesquisar = ''
+    if (searchTerm) {
+      pesquisar = `?search=${searchTerm}`
+    }
+    const pageParam =
+      pagina && elementosPorPagina
+        ? `?page=${pagina}&size=${elementosPorPagina}`
+        : ''
+    console.log(pageParam)
+    const token = localStorage.getItem('token')
+    const usersDashboard = await Api.get(`/users${pesquisar}${pageParam}`, {
       headers: { Authorization: token }
     })
     return usersDashboard.data

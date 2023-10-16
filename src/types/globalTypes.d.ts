@@ -35,3 +35,5 @@ type User = {
   password: string
   profiles: Profile[]
 }
+
+type UsuarioFilter = 'MEDICO' | 'CONTRATANTE' | 'TODOS'

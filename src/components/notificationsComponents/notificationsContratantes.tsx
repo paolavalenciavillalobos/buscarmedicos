@@ -23,11 +23,11 @@ export const NotificationsContratantes = () => {
       try {
         const userData = await GetNotifications()
         console.log(userData)
-        if (Array.isArray(userData)) {
+        if (Array.isArray(userData.content)) {
           // Verifica si userData es un array antes de acceder a su contenido
-          setUserData(userData)
+          setUserData(userData.content)
           let dataTemp: DataTempItem[] = []
-          userData.forEach((item: UserData) => {
+          userData.content.forEach((item: UserData) => {
             dataTemp.push({
               title: item.title,
               sendingDate: item.sendingDate,

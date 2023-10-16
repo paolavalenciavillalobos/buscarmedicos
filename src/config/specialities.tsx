@@ -43,3 +43,29 @@ export const UpdateSpecialties = async (id: string, data: datatypo) => {
     throw error
   }
 }
+
+export const DeleteSpecialties = async (id: string) => {
+  console.log()
+  try {
+    const token = localStorage.getItem('token')
+    const updateData = await Api.delete(`/specialties/${id}`, {
+      headers: { Authorization: token }
+    })
+    return updateData.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const Getbyid = async (id: string) => {
+  try {
+    const token = localStorage.getItem('token')
+    const data = await Api.get(`specialties/${id}`, {
+      headers: { Authorization: token }
+    })
+
+    return data.data
+  } catch (error) {
+    throw error
+  }
+}

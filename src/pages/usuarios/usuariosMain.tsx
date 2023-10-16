@@ -15,53 +15,93 @@ import {
 } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import SearchIcon from '../../assets/images/search.png'
 import { MedicosUsers } from '@/components/usuarios/medicos'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TableDashboard } from '@/components/usuarios/total'
+import { ContratantesUsers } from '@/components/usuarios/contratantes'
+import { GetUsersCount } from '@/config/servicies'
 
 interface Props {
   isActive: boolean
 }
 
 export const UsuariosMain = ({ isActive }: Props) => {
-  const [todos, setTodos] = useState(true)
-  const [medicos, setMedicos] = useState(false)
-  const [contratante, setContratante] = useState(false)
+  const [pagina, setPagina] = useState(1)
+  const [elementosPorPagina, setElementosPorPagina] = useState(10)
+  const [currentTab, setCurrentTab] = useState<
+    'TODOS' | 'MEDICO' | 'CONTRATANTE'
+  >('TODOS')
+  //const [todos, setTodos] = useState(true)
+  //const [medicos, setMedicos] = useState(false)
+  //const [contratante, setContratante] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
+  console.log(searchTerm)
+  console.log(pagina)
 
-  const handleTodosClick = () => {
-    setTodos(true)
-    setMedicos(false)
+  const [totalNumber, setTotalNumber] = useState({
+    total: 0,
+    totalDoctors: 0,
+    totalContractor: 0
+  })
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData = await GetUsersCount()
+        if (userData) {
+          setTotalNumber(userData)
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  /*const handleTodosClick = () => {
+    console.log('Click en Todos')
+    setCurrentTab('TODOS')
   }
 
   const handleMedicosClick = () => {
-    setTodos(false)
-    setMedicos(true)
-  }
+    console.log('Click')
+    setCurrentTab('MEDICO')
+  }*/
 
   return (
     <>
       <div>
         <DivMainTitle>
           <MainTitle>
-            Usuários Cadastrados| {todos ? 'Todos' : 'Contratante'}
+            Usuários Cadastrados|{' '}
+            {currentTab === 'TODOS' ? 'Todos' : 'Contratante'}
           </MainTitle>
         </DivMainTitle>
         <DivForTabs>
           <TabForSearchFilter
-            isActive={true}
+            //isActive={currentTab === 'TODOS'}
             type="button"
-            checked={todos} // Debería ser 'todos' en lugar de 'true'
-            onClick={handleTodosClick}
+            value={currentTab}
+            onClick={() => setCurrentTab('TODOS')}
           >
             <p>Todos</p>
-            <div>100</div>
+            <div>{totalNumber.total}</div>
           </TabForSearchFilter>
           <TabForSearchFilter
-            isActive={medicos}
+            //isActive={currentTab === 'CONTRATANTE'}
             type="button"
-            checked={medicos} // Debería ser 'medicos' en lugar de 'true'
-            onClick={handleMedicosClick} // Usa la función de manejo de eventos
+            value={currentTab}
+            onClick={() => setCurrentTab('MEDICO')}
           >
-            <p>Contratante</p> <div>100</div>
+            <p>Medico</p> <div>{totalNumber.totalDoctors}</div>
+          </TabForSearchFilter>
+          <TabForSearchFilter
+            //isActive={currentTab === 'CONTRATANTE'}
+            type="button"
+            value={currentTab}
+            onClick={() => setCurrentTab('CONTRATANTE')}
+          >
+            <p>Contratante</p> <div>{totalNumber.totalContractor}</div>
           </TabForSearchFilter>
         </DivForTabs>
         <DivForTable>
@@ -69,12 +109,33 @@ export const UsuariosMain = ({ isActive }: Props) => {
             <Search>
               <input
                 type="text"
-                placeholder="  Pesquise uma palavra chave..."
+                placeholder="Pesquise uma palavra chave..."
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
               />
               <img src={SearchIcon} alt="search" />
             </Search>
+            <div>Total de usuarios: {totalNumber.total}</div>
           </HeaderOnTable>
-          {todos === true ? <TableDashboard /> : <MedicosUsers />}
+          {currentTab === 'TODOS' ? (
+            <TableDashboard
+              searchTerm={searchTerm}
+              pagina={pagina}
+              elementosPorPagina={elementosPorPagina}
+              setPagina={setPagina}
+              setElementosPorPagina={setElementosPorPagina}
+            />
+          ) : currentTab === 'MEDICO' ? (
+            <MedicosUsers searchTerm={searchTerm} />
+          ) : (
+            currentTab === 'CONTRATANTE' && (
+              <ContratantesUsers searchTerm={searchTerm} />
+            )
+          )}
+          <button onClick={() => setPagina(pagina - 1)} disabled={pagina === 1}>
+            Anterior
+          </button>
+          <button onClick={() => setPagina(pagina + 1)}>Siguiente</button>
         </DivForTable>
       </div>
     </>

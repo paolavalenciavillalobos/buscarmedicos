@@ -2,7 +2,7 @@ import { GetLastUsers } from '@/config/servicies'
 import { useEffect, useState } from 'react'
 import { TableComponent } from '@/components/table/table'
 
-export const MedicosUsers = () => {
+export const ContratantesUsers = () => {
   const HeadColumns = [
     'Usuário',
     'E-mail',

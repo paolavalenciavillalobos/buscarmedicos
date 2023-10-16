@@ -7,7 +7,7 @@ import {
 } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import SearchIcon from '../../assets/images/search.png'
 import { GreenButtonForAdd } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
-import { EspecialidadesTable } from '@/components/especialidades/especialidadesTable'
+import { SpecialtiesTable } from '@/components/especialidades/especialidadesTable'
 import { Link } from 'react-router-dom'
 
 export const EspecialidadesMain = () => {
@@ -30,7 +30,7 @@ export const EspecialidadesMain = () => {
               <Link to={'/especialidades-criar'}>nova especialidade</Link>
             </GreenButtonForAdd>
           </HeaderOnTable>
-          <EspecialidadesTable />
+          <SpecialtiesTable />
         </DivForTable>
       </div>
     </>

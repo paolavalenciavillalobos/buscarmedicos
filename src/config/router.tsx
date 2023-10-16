@@ -1,9 +1,4 @@
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  createBrowserRouter
-} from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import BaseLayout from '@/pages/home/baselayout'
 import Login from '@/pages/login/login'
 import { DashboardMenu } from '@/components/home/dashboard/dashboard'
@@ -18,6 +13,10 @@ import { EditSpecialties } from '@/components/especialidades/editSpecialties'
 import { CreateNotifications } from '@/components/notificationsComponents/createNotifications'
 import { EditNotifications } from '@/components/notificationsComponents/editNotifications'
 import { EditQuestions } from '@/components/faq/editFaq'
+import { EditPlans } from '@/components/planos/editPlans'
+import { CreatePlans } from '@/components/planos/CreatePlans'
+import { Usuario } from '@/components/user/usuario'
+import { ViewSpecialties } from '@/components/especialidades/viewSpecialties'
 
 export default function Router() {
   return (
@@ -26,14 +25,25 @@ export default function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<BaseLayout />}>
           <Route index element={<DashboardMenu />} />
+          <Route path="/usuario" element={<Usuario />} />
+          <Route path="/usuario/admin" element={<EditPlans />} />
           <Route path="/usuarios" element={<UsuariosMain isActive={false} />} />
           <Route path="/planos" element={<PlanosMain />} />
+          <Route path="/planos/editar/:id" element={<EditPlans />} />
+          <Route path="/planos/criar" element={<CreatePlans />} />
           <Route path="/especialidades" element={<EspecialidadesMain />} />
           <Route
             path="/especialidades-criar"
             element={<SpecialtiesCreatePage />}
           />
-          <Route path="/especialidades/:id" element={<EditSpecialties />} />
+          <Route
+            path="/especialidades/edit/:id"
+            element={<EditSpecialties />}
+          />
+          <Route
+            path="/especialidades/visualizar/:id"
+            element={<ViewSpecialties />}
+          />
           <Route path="/notificacoes" element={<NotificationsMain />} />
           <Route path="/notificacoes-criar" element={<CreateNotifications />} />
           <Route path="/notificacoes/:id" element={<EditNotifications />} />
