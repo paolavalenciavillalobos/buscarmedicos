@@ -49,7 +49,7 @@ export default function Router() {
           <Route path="/notificacoes/:id" element={<EditNotifications />} />
           <Route path="/faq" element={<FaqMain />} />
           <Route path="/faq-criar" element={<CreateFaqs />} />
-          <Route path="/faq/:id" element={<EditQuestions />} />
+          <Route path="/faq/edit/:id" element={<EditQuestions />} />
         </Route>
       </Routes>
     </BrowserRouter>

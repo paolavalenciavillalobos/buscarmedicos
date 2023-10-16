@@ -9,7 +9,7 @@ import SearchIcon from '../../assets/images/search.png'
 import { GreenButtonForAdd } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import { EspecialidadesTable } from '@/components/especialidades/especialidadesTable'
 import { Link } from 'react-router-dom'
-import { FaqMedicos } from '@/components/faq/faqTable'
+import { FaqMedicos, Medicosfaq } from '@/components/faq/faqTable'
 
 export const FaqMain = () => {
   return (
@@ -31,7 +31,7 @@ export const FaqMain = () => {
               <Link to={'/faq-criar'}>Novo FAQ </Link>
             </GreenButtonForAdd>
           </HeaderOnTable>
-          <FaqMedicos />
+          <Medicosfaq />
         </DivForTable>
       </div>
     </>

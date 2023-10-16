@@ -17,6 +17,7 @@ type SpecialtiesTypo = {
 
 export const SpecialtiesTable = () => {
   const [specialties, setSpecialties] = useState<SpecialtiesTypo[]>([])
+  const [item, setItem] = useState('')
 
   const tableColumns = ['Nome', 'Situação', 'Ações']
 
@@ -24,9 +25,9 @@ export const SpecialtiesTable = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      await DeleteSpecialties(id)
+      await DeleteSpecialties(item)
       setSpecialties(prevSpecialties =>
-        prevSpecialties.filter(item => item.id !== id)
+        prevSpecialties.filter(i => i.id !== item)
       )
     } catch (error) {
       console.error('Error deleting specialty:', error)
@@ -64,7 +65,7 @@ export const SpecialtiesTable = () => {
                 >
                   <img src={EditButton} />
                 </EditButtonUniversal>
-                <EditButtonUniversal onClick={() => handleDelete(id)}>
+                <EditButtonUniversal onClick={() => setItem(currentValue.id)}>
                   <img src={DeleteButton} />
                 </EditButtonUniversal>
               </div>

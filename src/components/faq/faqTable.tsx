@@ -1,60 +1,76 @@
-import {
-  DivForTable,
-  DivForTitleOnTable,
-  Table,
-  TitleForTableDashboard
-} from '@/assets/styles/home/dashboard/tableDashboard'
+import { ReactNode, useEffect, useState } from 'react'
+import { TableComponent } from '../table/table'
+import EditButton from '../../assets/images/edit.png'
+import DeleteButton from '../../assets/images/delete.png'
+import VisualizerButton from '../../assets/images/visualize.png'
 
-import { useEffect, useState } from 'react'
-import { TableComponent } from '@/components/table/table'
+import { useNavigate } from 'react-router-dom'
+import { EditButtonUniversal } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import { GetQuestions } from '@/config/faqServices'
-import { Link } from 'react-router-dom'
 
-export const FaqMedicos = () => {
-  const HeadColumns = ['Titulo', 'Ações']
+type FaqTypo = {
+  id?: number
+  title: string
+  enabled?: ReactNode
+  actions: ReactNode
+}
 
-  const [userData, setUserData] = useState<Array<UserData>>([])
-  const [userDataProcessed, setUserDataProcessed] = useState<
-    Array<DataTempItem>
-  >([])
+export const Medicosfaq = () => {
+  const [faq, setFaq] = useState<FaqTypo[]>([])
+
+  const tableColumns = ['Nome', 'Ações']
+
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userData = await GetQuestions()
-        console.log(userData)
-        if (Array.isArray(userData)) {
-          // Verifica si userData es un array antes de acceder a su contenido
-          setUserData(userData)
-          let dataTemp: DataTempItem[] = []
-          userData.forEach((item: UserData) => {
-            dataTemp.push({
-              title: item.title,
-              id: item.id
-            })
-          })
-          setUserDataProcessed(dataTemp)
-          console.log(userData)
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      }
+    const fetchFaq = async () => {
+      const result = await GetQuestions()
+
+      console.log(result.content)
+      const faqFormatted = result?.content.reduce(
+        (accumulator, currentValue) => {
+          const faqTable = {
+            title: currentValue.title ? currentValue.title : '-',
+
+            /*enabled: (
+              <div>
+                <input type="checkbox" checked={currentValue.enabled} />
+                <label>{currentValue.enabled ? 'Ativo' : 'Inativo'} </label>
+              </div>
+            ),*/
+            actions: (
+              <div>
+                <EditButtonUniversal
+                  onClick={() => navigate(`faq/visualizar/${currentValue.id}`)}
+                >
+                  <img src={VisualizerButton} />
+                </EditButtonUniversal>
+                <EditButtonUniversal
+                  onClick={() => navigate(`faq/edit/${currentValue.id}`)}
+                >
+                  <img src={EditButton} />
+                </EditButtonUniversal>
+                <EditButtonUniversal onClick={() => {}}>
+                  <img src={DeleteButton} />
+                </EditButtonUniversal>
+              </div>
+            )
+          }
+          console.log(faq)
+          return [...accumulator, faqTable]
+        },
+        [] as FaqTypo[]
+      )
+
+      setFaq(faqFormatted ?? [])
     }
 
-    fetchData()
-  }, [])
+    fetchFaq()
+  }, [navigate])
 
   return (
     <>
-      <TableComponent
-        HeadColumns={HeadColumns}
-        BodyRow={userDataProcessed}
-        renderAdditionalColumn={item => (
-          <Link to={`/faq/${item.id}`} className="edit-button">
-            Editar
-          </Link>
-        )}
-      />
+      <TableComponent HeadColumns={tableColumns} BodyRow={faq} />
     </>
   )
 }
