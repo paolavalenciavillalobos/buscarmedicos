@@ -9,17 +9,18 @@ import {
 } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import SearchIcon from '../../assets/images/search.png'
 import { GreenButtonForAdd } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { FaqContratantes } from '@/components/faq/faqcontratantes'
 import { Medicosfaq } from '@/components/faq/faqTable'
 
 export const FaqMain = () => {
-  const [pagina, setPagina] = useState(1)
-  const [elementosPorPagina, setElementosPorPagina] = useState(10)
+  const [pagina, setPagina] = useState(0)
+  const [elementosPorPagina, setElementosPorPagina] = useState(4)
   const [currentTab, setCurrentTab] = useState<'MEDICO' | 'CONTRATANTE'>(
     'MEDICO'
   )
+  const { type } = useParams()
   const [searchTerm, setSearchTerm] = useState('')
   console.log(searchTerm)
   console.log(pagina)
@@ -60,7 +61,7 @@ export const FaqMain = () => {
               <img src={SearchIcon} alt="search" />
             </Search>
             <GreenButtonForAdd>
-              <Link to={'/faq-criar'}>Novo FAQ </Link>
+              <Link to={`/faq-criar/${currentTab}`}>Novo FAQ </Link>
             </GreenButtonForAdd>
           </HeaderOnTable>
           {currentTab === 'MEDICO' ? (
@@ -82,7 +83,7 @@ export const FaqMain = () => {
               />
             )
           )}
-          <button onClick={() => setPagina(pagina - 1)} disabled={pagina === 1}>
+          <button onClick={() => setPagina(pagina - 1)} disabled={pagina === 0}>
             Anterior
           </button>
           <button onClick={() => setPagina(pagina + 1)}>Siguiente</button>

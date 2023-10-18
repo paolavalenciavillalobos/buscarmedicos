@@ -46,7 +46,7 @@ export const EspecialidadesMain = () => {
             setPagina={setPagina}
             setElementosPorPagina={setElementosPorPagina}
           />
-          <button onClick={() => setPagina(pagina - 1)} disabled={pagina === 1}>
+          <button onClick={() => setPagina(pagina - 1)} disabled={pagina === 0}>
             Anterior
           </button>
           <button onClick={() => setPagina(pagina + 1)}>Siguiente</button>

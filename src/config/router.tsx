@@ -17,6 +17,7 @@ import { EditPlans } from '@/components/planos/editPlans'
 import { CreatePlans } from '@/components/planos/CreatePlans'
 import { Usuario } from '@/components/user/usuario'
 import { ViewSpecialties } from '@/components/especialidades/viewSpecialties'
+import { ViewFaq } from '@/components/faq/viewFaq'
 
 export default function Router() {
   return (
@@ -48,8 +49,9 @@ export default function Router() {
           <Route path="/notificacoes-criar" element={<CreateNotifications />} />
           <Route path="/notificacoes/:id" element={<EditNotifications />} />
           <Route path="/faq" element={<FaqMain />} />
-          <Route path="/faq-criar" element={<CreateFaqs />} />
+          <Route path="/faq-criar/:type" element={<CreateFaqs />} />
           <Route path="/faq/edit/:id" element={<EditQuestions />} />
+          <Route path="/faq/view/:id" element={<ViewFaq />} />
         </Route>
       </Routes>
     </BrowserRouter>

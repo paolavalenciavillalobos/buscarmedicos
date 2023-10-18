@@ -63,7 +63,7 @@ export const DeleteSpecialties = async (id: number) => {
   }
 }
 
-export const Getbyid = async (id: string) => {
+export const GetbyidSpecialties = async (id: number) => {
   try {
     const token = localStorage.getItem('token')
     const data = await Api.get(`specialties/${id}`, {

@@ -1,23 +1,15 @@
 import Api from '../Api'
 
 export const GetQuestions = async (
-  searchTerm: string | null,
-  pagina: number,
-  elementosPorPagina: number
+  searchTerm?: string | null,
+  pagina?: number,
+  elementosPorPagina?: number
 ) => {
   try {
-    let pesquisar = ''
-    if (searchTerm) {
-      pesquisar = `?search=${searchTerm}`
-    }
-    const pageParam =
-      pagina && elementosPorPagina
-        ? `?page=${pagina}&size=${elementosPorPagina}`
-        : ''
-    console.log(pageParam)
     const token = localStorage.getItem('token')
-    const dataGet = await Api.get(`/questions${pesquisar}${pageParam}`, {
-      headers: { Authorization: token }
+    const dataGet = await Api.get(`/questions`, {
+      headers: { Authorization: token },
+      params: { page: pagina, size: elementosPorPagina, search: searchTerm }
     })
     return dataGet.data
   } catch (error) {

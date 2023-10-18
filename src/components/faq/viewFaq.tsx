@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { GetSpecialties, GetbyidSpecialties } from '@/config/specialities'
+import { GetSpecialties } from '@/config/specialities'
+import { GetQuestions } from '@/config/faqServices'
 
-export const ViewSpecialties = () => {
+export const ViewFaq = () => {
   const { id } = useParams<string>()
   const [specialty, setSpecialty] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await GetbyidSpecialties(id)
+        const response = await GetQuestions(id)
 
         if (response.content) {
           const foundSpecialty = response.content.find(
@@ -38,9 +39,10 @@ export const ViewSpecialties = () => {
   return (
     <div>
       <div>
-        <h2>{specialty.name}</h2>
+        <h2>{specialty.title}</h2>
         <p>ID: {specialty.id}</p>
-        <p>Enabled: {specialty.enabled ? 'Activo' : 'Inactivo'}</p>
+        <p>Message: {specialty.message}</p>
+        <p>Type: {specialty.type}</p>
         <p>Created At: {specialty.createdAt}</p>
         <p>Updated At: {specialty.updatedAt}</p>
       </div>

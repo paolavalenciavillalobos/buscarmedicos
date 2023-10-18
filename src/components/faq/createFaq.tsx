@@ -1,17 +1,18 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { createFaqService } from '@/config/faqServices'
 
-export const CreateFaqs = ({ userType }) => {
+export const CreateFaqs = () => {
   const [title, setTitle] = useState<string>('')
   const [message, setMessage] = useState<string>('')
+  const { type } = useParams()
 
   const handleLoginSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
     const data = {
       title,
       message,
-      userType
+      type
     }
     const create = await createFaqService(data)
     console.log('QUESTION:', create)

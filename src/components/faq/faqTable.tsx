@@ -49,56 +49,57 @@ export const Medicosfaq = ({
 
   const navigate = useNavigate()
 
+  const fetchFaq = async () => {
+    const result = await GetQuestions(searchTerm, pagina, elementosPorPagina)
+
+    console.log(result.content)
+    const faqFormatted = result?.content.reduce((accumulator, currentValue) => {
+      const faqTable = {
+        title: currentValue.title ? currentValue.title : '-',
+
+        /*enabled: (
+            <div>
+              <input type="checkbox" checked={currentValue.enabled} />
+              <label>{currentValue.enabled ? 'Ativo' : 'Inativo'} </label>
+            </div>
+          ),*/
+        actions: (
+          <div>
+            <EditButtonUniversal
+              onClick={() => navigate(`view/${currentValue.id}`)}
+            >
+              <img src={VisualizerButton} />
+            </EditButtonUniversal>
+            <EditButtonUniversal
+              onClick={() => navigate(`edit/${currentValue.id}`)}
+            >
+              <img src={EditButton} />
+            </EditButtonUniversal>
+            <EditButtonUniversal
+              onClick={() => {
+                setIdToDelete(currentValue.id)
+                setIsModalOpen(true)
+              }}
+            >
+              <img src={DeleteButton} />
+            </EditButtonUniversal>
+          </div>
+        )
+      }
+      console.log(faq)
+      return [...accumulator, faqTable]
+    }, [])
+
+    setFaq(faqFormatted ?? [])
+  }
+
   useEffect(() => {
-    const fetchFaq = async () => {
-      const result = await GetQuestions()
+    setPagina(0)
+  }, [searchTerm])
 
-      console.log(result.content)
-      const faqFormatted = result?.content.reduce(
-        (accumulator, currentValue) => {
-          const faqTable = {
-            title: currentValue.title ? currentValue.title : '-',
-
-            /*enabled: (
-              <div>
-                <input type="checkbox" checked={currentValue.enabled} />
-                <label>{currentValue.enabled ? 'Ativo' : 'Inativo'} </label>
-              </div>
-            ),*/
-            actions: (
-              <div>
-                <EditButtonUniversal
-                  onClick={() => navigate(`faq/visualizar/${currentValue.id}`)}
-                >
-                  <img src={VisualizerButton} />
-                </EditButtonUniversal>
-                <EditButtonUniversal
-                  onClick={() => navigate(`faq/edit/${currentValue.id}`)}
-                >
-                  <img src={EditButton} />
-                </EditButtonUniversal>
-                <EditButtonUniversal
-                  onClick={() => {
-                    setIdToDelete(currentValue.id)
-                    setIsModalOpen(true)
-                  }}
-                >
-                  <img src={DeleteButton} />
-                </EditButtonUniversal>
-              </div>
-            )
-          }
-          console.log(faq)
-          return [...accumulator, faqTable]
-        },
-        [searchTerm, pagina, elementosPorPagina]
-      )
-
-      setFaq(faqFormatted ?? [])
-    }
-
+  useEffect(() => {
     fetchFaq()
-  }, [navigate])
+  }, [navigate, searchTerm, pagina, elementosPorPagina])
 
   return (
     <>
@@ -109,6 +110,7 @@ export const Medicosfaq = ({
           <button
             onClick={() => {
               handleDelete(idToDelete)
+              fetchFaq()
               closeModal()
             }}
           >
