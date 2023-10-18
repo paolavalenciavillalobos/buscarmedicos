@@ -9,8 +9,15 @@ import SearchIcon from '../../assets/images/search.png'
 import { GreenButtonForAdd } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import { SpecialtiesTable } from '@/components/especialidades/especialidadesTable'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 export const EspecialidadesMain = () => {
+  const [pagina, setPagina] = useState(0)
+  const [elementosPorPagina, setElementosPorPagina] = useState(3)
+  const [searchTerm, setSearchTerm] = useState('')
+  //console.log(searchTerm)
+  console.log(pagina, 'main')
+
   return (
     <>
       <div>
@@ -23,6 +30,8 @@ export const EspecialidadesMain = () => {
               <input
                 type="text"
                 placeholder="  Pesquise uma palavra chave..."
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
               />
               <img src={SearchIcon} alt="search" />
             </Search>
@@ -30,7 +39,17 @@ export const EspecialidadesMain = () => {
               <Link to={'/especialidades-criar'}>nova especialidade</Link>
             </GreenButtonForAdd>
           </HeaderOnTable>
-          <SpecialtiesTable />
+          <SpecialtiesTable
+            searchTerm={searchTerm}
+            pagina={pagina}
+            elementosPorPagina={elementosPorPagina}
+            setPagina={setPagina}
+            setElementosPorPagina={setElementosPorPagina}
+          />
+          <button onClick={() => setPagina(pagina - 1)} disabled={pagina === 1}>
+            Anterior
+          </button>
+          <button onClick={() => setPagina(pagina + 1)}>Siguiente</button>
         </DivForTable>
       </div>
     </>

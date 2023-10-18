@@ -1,10 +1,16 @@
 import Api from '../Api'
 
-export const GetSpecialties = async () => {
+export const GetSpecialties = async (
+  searchTerm: string | null,
+  pagina: number,
+  elementosPorPagina: number
+) => {
+  console.log('pagina', pagina)
   try {
     const token = localStorage.getItem('token')
-    const dataGet = await Api.get('/specialties', {
-      headers: { Authorization: token }
+    const dataGet = await Api.get(`/specialties`, {
+      headers: { Authorization: token },
+      params: { page: pagina, size: elementosPorPagina, search: searchTerm }
     })
     return dataGet.data
   } catch (error) {
@@ -44,7 +50,7 @@ export const UpdateSpecialties = async (id: string, data: datatypo) => {
   }
 }
 
-export const DeleteSpecialties = async (id: string) => {
+export const DeleteSpecialties = async (id: number) => {
   console.log()
   try {
     const token = localStorage.getItem('token')

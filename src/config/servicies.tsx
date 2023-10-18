@@ -45,7 +45,7 @@ export const GetLastUsers = async (
   try {
     let pesquisar = ''
     if (searchTerm) {
-      pesquisar = `?search=${searchTerm}`
+      pesquisar = `&search=${searchTerm}`
     }
     const pageParam =
       pagina && elementosPorPagina
@@ -53,7 +53,7 @@ export const GetLastUsers = async (
         : ''
     console.log(pageParam)
     const token = localStorage.getItem('token')
-    const usersDashboard = await Api.get(`/users${pesquisar}${pageParam}`, {
+    const usersDashboard = await Api.get(`/users${pageParam}${pesquisar}`, {
       headers: { Authorization: token }
     })
     return usersDashboard.data

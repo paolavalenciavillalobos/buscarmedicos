@@ -36,4 +36,10 @@ type User = {
   profiles: Profile[]
 }
 
-type UsuarioFilter = 'MEDICO' | 'CONTRATANTE' | 'TODOS'
+interface TableDashboardProps {
+  searchTerm: string
+  pagina: number
+  elementosPorPagina: number
+  setPagina: (pagina: number) => void
+  setElementosPorPagina: (elementosPorPagina: number) => void
+}

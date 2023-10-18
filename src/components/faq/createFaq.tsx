@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { createFaqService } from '@/config/faqServices'
 
-export const CreateFaqs = () => {
+export const CreateFaqs = ({ userType }) => {
   const [title, setTitle] = useState<string>('')
   const [message, setMessage] = useState<string>('')
 
@@ -10,7 +10,8 @@ export const CreateFaqs = () => {
     e.preventDefault()
     const data = {
       title,
-      message
+      message,
+      userType
     }
     const create = await createFaqService(data)
     console.log('QUESTION:', create)

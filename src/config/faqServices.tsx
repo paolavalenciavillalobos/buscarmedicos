@@ -1,9 +1,22 @@
 import Api from '../Api'
 
-export const GetQuestions = async () => {
+export const GetQuestions = async (
+  searchTerm: string | null,
+  pagina: number,
+  elementosPorPagina: number
+) => {
   try {
+    let pesquisar = ''
+    if (searchTerm) {
+      pesquisar = `?search=${searchTerm}`
+    }
+    const pageParam =
+      pagina && elementosPorPagina
+        ? `?page=${pagina}&size=${elementosPorPagina}`
+        : ''
+    console.log(pageParam)
     const token = localStorage.getItem('token')
-    const dataGet = await Api.get('/questions', {
+    const dataGet = await Api.get(`/questions${pesquisar}${pageParam}`, {
       headers: { Authorization: token }
     })
     return dataGet.data
@@ -36,6 +49,19 @@ export const UpdateFaq = async (id: string, data: datatypoFaq) => {
   try {
     const token = localStorage.getItem('token')
     const updateData = await Api.put(`/questions/${id}`, data, {
+      headers: { Authorization: token }
+    })
+    return updateData.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const DeleteFaq = async (id: number) => {
+  console.log()
+  try {
+    const token = localStorage.getItem('token')
+    const updateData = await Api.delete(`/questions/${id}`, {
       headers: { Authorization: token }
     })
     return updateData.data
