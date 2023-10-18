@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { GetSpecialties, UpdateSpecialties } from '../../config/specialities' // Reemplaza con las funciones de tu API
+import {
+  GetSpecialties,
+  GetbyidSpecialties,
+  UpdateSpecialties
+} from '../../config/specialities' // Reemplaza con las funciones de tu API
 
 export const EditSpecialties = () => {
   const { id } = useParams()
@@ -9,18 +13,12 @@ export const EditSpecialties = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await GetSpecialties(id)
-        if (response.content) {
-          const foundSpecialty = response.content.find(
-            item => item.id === Number(id)
-          )
-          if (foundSpecialty) {
-            setSpecialty(foundSpecialty)
-          } else {
-            console.error(`Specialty with id ${id} not found`)
-          }
+        const response = await GetbyidSpecialties(id)
+        if (response) {
+          // Quita la verificación response.content
+          setSpecialty(response) // No necesitas buscar en response.content
         } else {
-          console.error('Invalid response data:', response)
+          console.error(`Specialty with id ${id} not found`)
         }
       } catch (error) {
         console.error('Error fetching data:', error)

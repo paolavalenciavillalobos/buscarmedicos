@@ -10,18 +10,13 @@ export const ViewSpecialties = () => {
     const fetchData = async () => {
       try {
         const response = await GetbyidSpecialties(id)
+        console.log(response)
 
-        if (response.content) {
-          const foundSpecialty = response.content.find(
-            item => item.id === Number(id)
-          )
-          if (foundSpecialty) {
-            setSpecialty(foundSpecialty)
-          } else {
-            console.error(`Specialty with id ${id} not found`)
-          }
+        if (response) {
+          // Quita la verificación response.content
+          setSpecialty(response) // No necesitas buscar en response.content
         } else {
-          console.error('Invalid response data:', response)
+          console.error(`Specialty with id ${id} not found`)
         }
       } catch (error) {
         console.error('Error fetching data:', error)

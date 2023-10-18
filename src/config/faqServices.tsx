@@ -61,3 +61,16 @@ export const DeleteFaq = async (id: number) => {
     throw error
   }
 }
+
+export const GetbyidQuestions = async (id: number) => {
+  try {
+    const token = localStorage.getItem('token')
+    const data = await Api.get(`/questions/${id}`, {
+      headers: { Authorization: token }
+    })
+
+    return data.data
+  } catch (error) {
+    throw error
+  }
+}

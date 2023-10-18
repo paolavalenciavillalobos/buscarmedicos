@@ -63,6 +63,8 @@ export const DeleteSpecialties = async (id: number) => {
   }
 }
 
+//do a get only for id** ===>> (pero por alguna razon no funciona)
+
 export const GetbyidSpecialties = async (id: number) => {
   try {
     const token = localStorage.getItem('token')

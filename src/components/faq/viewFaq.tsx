@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { GetSpecialties } from '@/config/specialities'
-import { GetQuestions } from '@/config/faqServices'
+import { GetQuestions, GetbyidQuestions } from '@/config/faqServices'
 
 export const ViewFaq = () => {
   const { id } = useParams<string>()
@@ -10,19 +10,13 @@ export const ViewFaq = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await GetQuestions(id)
+        const response = await GetbyidQuestions(id)
 
-        if (response.content) {
-          const foundSpecialty = response.content.find(
-            item => item.id === Number(id)
-          )
-          if (foundSpecialty) {
-            setSpecialty(foundSpecialty)
-          } else {
-            console.error(`Specialty with id ${id} not found`)
-          }
+        if (response) {
+          // Quita la verificación response.content
+          setSpecialty(response) // No necesitas buscar en response.content
         } else {
-          console.error('Invalid response data:', response)
+          console.error(`Specialty with id ${id} not found`)
         }
       } catch (error) {
         console.error('Error fetching data:', error)
