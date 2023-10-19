@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import {
-  GetSpecialties,
   GetbyidSpecialties,
   UpdateSpecialties
-} from '../../config/specialities' // Reemplaza con las funciones de tu API
+} from '../../config/specialities'
+import {
+  BodyForForm,
+  BoxForForm,
+  ButtonInputsEditCreate,
+  InputDados,
+  TitleForForm,
+  TitleEditCreate,
+  DivForTitle,
+  BackButton
+} from '@/assets/styles/inputs/editCreate'
+import leftSmall from '../../assets/images/left-small.png'
 
 export const EditSpecialties = () => {
   const { id } = useParams()
@@ -15,8 +25,7 @@ export const EditSpecialties = () => {
       try {
         const response = await GetbyidSpecialties(id)
         if (response) {
-          // Quita la verificación response.content
-          setSpecialty(response) // No necesitas buscar en response.content
+          setSpecialty(response)
         } else {
           console.error(`Specialty with id ${id} not found`)
         }
@@ -53,33 +62,43 @@ export const EditSpecialties = () => {
   }
 
   return (
-    <div>
-      <h2>Edit Speciality</h2>
+    <>
+      <DivForTitle>
+        <BackButton>
+          <img src={leftSmall} />
+        </BackButton>
+        <TitleEditCreate> Editar especialidade</TitleEditCreate>
+      </DivForTitle>
       <form>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            value={specialty.name}
-            onChange={handleNameChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="enabled">Enabled:</label>
-          <input
-            type="checkbox"
-            id="enabled"
-            checked={specialty.enabled}
-            onChange={handleEnabledChange}
-          />
-        </div>
-        <div>
-          <button type="button" onClick={handleUpdate}>
-            Save Changes
-          </button>
-        </div>
+        <BodyForForm>
+          <TitleForForm>Dados da especialidade</TitleForForm>
+          <BoxForForm>
+            <InputDados>
+              <label htmlFor="name">Nome:</label>
+              <input
+                type="text"
+                id="name"
+                value={specialty.name}
+                onChange={handleNameChange}
+              />
+            </InputDados>
+            <InputDados>
+              <label htmlFor="description">Situação</label>
+              <label htmlFor="enabled">Ativo</label>
+              <input
+                type="checkbox"
+                id="enabled"
+                checked={specialty.enabled}
+                onChange={handleEnabledChange}
+              />
+            </InputDados>
+          </BoxForForm>
+
+          <ButtonInputsEditCreate type="button" onClick={handleUpdate}>
+            Salvar
+          </ButtonInputsEditCreate>
+        </BodyForForm>
       </form>
-    </div>
+    </>
   )
 }

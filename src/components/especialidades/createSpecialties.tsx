@@ -11,6 +11,7 @@ import {
   DivForTitle,
   BackButton
 } from '@/assets/styles/inputs/editCreate'
+import leftSmall from '../../assets/images/left-small.png'
 
 export const CreateSpecialties = () => {
   const [name, setName] = useState<string>('')
@@ -32,7 +33,9 @@ export const CreateSpecialties = () => {
   return (
     <>
       <DivForTitle>
-        <BackButton>+</BackButton>
+        <BackButton>
+          <img src={leftSmall} />
+        </BackButton>
         <TitleEditCreate> Nova especialidade</TitleEditCreate>
       </DivForTitle>
       <form onSubmit={handleLoginSubmit}>
@@ -41,7 +44,7 @@ export const CreateSpecialties = () => {
           <BoxForForm>
             <InputDados>
               <label htmlFor="title">Nome</label>
-              <p>{name}</p>
+
               <input
                 id="title"
                 type="text"
@@ -50,8 +53,8 @@ export const CreateSpecialties = () => {
               />
             </InputDados>
             <InputDados>
-              <label htmlFor="description">ativo</label> <p>{enabled}</p>
-              <label htmlFor="enabled">Activo</label>
+              <label htmlFor="description">Situação</label>
+              <label htmlFor="enabled">Ativo</label>
               <input
                 id="enabled"
                 type="checkbox"

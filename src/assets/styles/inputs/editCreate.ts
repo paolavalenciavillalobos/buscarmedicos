@@ -1,13 +1,16 @@
 import styled from 'styled-components'
 
 export const ButtonInputsEditCreate = styled.button`
-  width: 30%;
+  width: 26.5%;
   border-radius: 16px;
   border: none;
   color: white;
+  margin-left: 1%;
+  margin-top: 2%;
+  margin-bottom: 4%;
   background-color: #046639;
   font-family: 'Poppins', sans-serif;
-  padding: 1.5%;
+  padding: 1.2%;
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
@@ -43,7 +46,8 @@ export const TitleForForm = styled.p`
   font-weight: 600;
   line-height: 28px;
   letter-spacing: 0.20000000298023224px;
-  margin: 2%;
+  margin-top: 2%;
+  margin-left: 1%;
   padding-bottom: 1.5%;
 `
 
@@ -61,14 +65,17 @@ export const BodyForForm = styled.div`
   padding: 1%;
 `
 export const BackButton = styled.button`
+  width: 4%;
   border-radius: 50%;
   border: none;
   margin-right: 1%;
 `
 export const TitleEditCreate = styled.p`
+  display: flex;
+  align-items: center;
   font-family: 'Sora', sans-serif;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
   color: #212121;

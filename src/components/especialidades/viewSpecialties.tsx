@@ -1,6 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { GetSpecialties, GetbyidSpecialties } from '@/config/specialities'
+import {
+  BodyForForm,
+  BoxForForm,
+  ButtonInputsEditCreate,
+  InputDados,
+  TitleForForm,
+  TitleEditCreate,
+  DivForTitle,
+  BackButton
+} from '@/assets/styles/inputs/editCreate'
+import leftSmall from '../../assets/images/left-small.png'
 
 export const ViewSpecialties = () => {
   const { id } = useParams<string>()
@@ -13,8 +24,7 @@ export const ViewSpecialties = () => {
         console.log(response)
 
         if (response) {
-          // Quita la verificación response.content
-          setSpecialty(response) // No necesitas buscar en response.content
+          setSpecialty(response)
         } else {
           console.error(`Specialty with id ${id} not found`)
         }
@@ -31,14 +41,55 @@ export const ViewSpecialties = () => {
   }
 
   return (
-    <div>
-      <div>
-        <h2>{specialty.name}</h2>
-        <p>ID: {specialty.id}</p>
-        <p>Enabled: {specialty.enabled ? 'Activo' : 'Inactivo'}</p>
-        <p>Created At: {specialty.createdAt}</p>
-        <p>Updated At: {specialty.updatedAt}</p>
-      </div>
-    </div>
+    <>
+      <DivForTitle>
+        <BackButton>
+          <img src={leftSmall} />
+        </BackButton>
+        <TitleEditCreate> Ver especialidade</TitleEditCreate>
+      </DivForTitle>
+      <form>
+        <BodyForForm>
+          <TitleForForm>Dados da especialidade</TitleForForm>
+          <BoxForForm>
+            <div style={{ display: 'flex', width: '100%' }}>
+              <InputDados>
+                <label htmlFor="name">Nome</label>
+                <input id="name" type="text" value={specialty.name} disabled />
+              </InputDados>
+              <InputDados>
+                <label htmlFor="enabled">Situação</label>
+                <input
+                  id="enabled"
+                  type="text"
+                  value={specialty.createdAt}
+                  disabled
+                />
+              </InputDados>
+            </div>
+            <div style={{ display: 'flex' }}>
+              <InputDados>
+                <label htmlFor="create">Data de criação</label>
+                <input
+                  id="create"
+                  type="text"
+                  value={specialty.createdAt}
+                  disabled
+                />
+              </InputDados>
+              <InputDados>
+                <label htmlFor="edit">Data de edição</label>
+                <input
+                  id="edit"
+                  type="text"
+                  value={specialty.updatedAt}
+                  disabled
+                />
+              </InputDados>
+            </div>
+          </BoxForForm>
+        </BodyForForm>
+      </form>
+    </>
   )
 }
