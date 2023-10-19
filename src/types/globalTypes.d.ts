@@ -39,8 +39,8 @@ type User = {
 interface TableDashboardProps {
   searchTerm: string
   pagina: number
-  elementosPorPagina: number
-  setPagina: (pagina: number) => void
-  setElementosPorPagina: (elementosPorPagina: number) => void
-  type: string
+  elementosPorPagina?: number
+  setPagina?: (pagina: number) => void
+  setElementosPorPagina?: (elementosPorPagina: number) => void
+  type?: string
 }

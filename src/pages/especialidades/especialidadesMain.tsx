@@ -15,7 +15,7 @@ export const EspecialidadesMain = () => {
   const [pagina, setPagina] = useState(0)
   const [elementosPorPagina, setElementosPorPagina] = useState(3)
   const [searchTerm, setSearchTerm] = useState('')
-  //console.log(searchTerm)
+
   console.log(pagina, 'main')
 
   return (

@@ -50,8 +50,12 @@ export const TableDashboard = ({
               whatsapp: item.phone,
               specialty:
                 item.specialties.length > 0 ? item.specialties[0].name : '-',
-              city: item?.address?.city,
-              uf: item?.address?.uf,
+              city:
+                item?.address?.city.length > 0 ? item.specialties[0].name : '-',
+              uf:
+                item?.address?.state.length > 0
+                  ? item.specialties[0].name
+                  : '-',
               userType: item.profiles.length > 0 ? item.profiles[0].name : '-'
             })
           })

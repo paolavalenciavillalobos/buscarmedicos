@@ -35,8 +35,6 @@ export const SpecialtiesTable = ({
     setIsModalOpen(false)
   }
 
-  //const [item, setItem] = useState('')
-
   const tableColumns = ['Nome', 'Situação', 'Ações']
 
   const navigate = useNavigate()
