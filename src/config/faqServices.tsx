@@ -3,13 +3,19 @@ import Api from '../Api'
 export const GetQuestions = async (
   searchTerm?: string | null,
   pagina?: number,
-  elementosPorPagina?: number
+  elementosPorPagina?: number,
+  currentTab?: string
 ) => {
   try {
     const token = localStorage.getItem('token')
     const dataGet = await Api.get(`/questions`, {
       headers: { Authorization: token },
-      params: { page: pagina, size: elementosPorPagina, search: searchTerm }
+      params: {
+        page: pagina,
+        size: elementosPorPagina,
+        search: searchTerm,
+        type: currentTab
+      }
     })
     return dataGet.data
   } catch (error) {

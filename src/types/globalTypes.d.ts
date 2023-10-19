@@ -42,4 +42,5 @@ interface TableDashboardProps {
   elementosPorPagina: number
   setPagina: (pagina: number) => void
   setElementosPorPagina: (elementosPorPagina: number) => void
+  type: string
 }

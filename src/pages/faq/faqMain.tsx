@@ -16,7 +16,7 @@ import { Medicosfaq } from '@/components/faq/faqTable'
 
 export const FaqMain = () => {
   const [pagina, setPagina] = useState(0)
-  const [elementosPorPagina, setElementosPorPagina] = useState(4)
+  const [elementosPorPagina, setElementosPorPagina] = useState(8)
   const [currentTab, setCurrentTab] = useState<'MEDICO' | 'CONTRATANTE'>(
     'MEDICO'
   )
@@ -71,6 +71,7 @@ export const FaqMain = () => {
               elementosPorPagina={elementosPorPagina}
               setPagina={setPagina}
               setElementosPorPagina={setElementosPorPagina}
+              type={currentTab}
             />
           ) : (
             currentTab === 'CONTRATANTE' && (
@@ -80,6 +81,7 @@ export const FaqMain = () => {
                 elementosPorPagina={elementosPorPagina}
                 setPagina={setPagina}
                 setElementosPorPagina={setElementosPorPagina}
+                type={currentTab}
               />
             )
           )}

@@ -56,7 +56,7 @@ export const CreateSpecialties = () => {
                 id="enabled"
                 type="checkbox"
                 checked={enabled}
-                onChange={e => setEnabled(e.target.checked)} // Actualiza el estado cuando el checkbox cambie
+                onChange={e => setEnabled(e.target.checked)}
               />
             </InputDados>
           </BoxForForm>

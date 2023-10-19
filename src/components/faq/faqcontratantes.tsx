@@ -21,7 +21,7 @@ export const FaqContratantes = ({
   pagina,
   elementosPorPagina,
   setPagina,
-  setElementosPorPagina
+  type
 }: TableDashboardProps) => {
   const [faq, setFaq] = useState<FaqTypo[]>([])
 
@@ -50,19 +50,17 @@ export const FaqContratantes = ({
   const navigate = useNavigate()
 
   const fetchFaq = async () => {
-    const result = await GetQuestions(searchTerm, pagina, elementosPorPagina)
+    const result = await GetQuestions(
+      searchTerm,
+      pagina,
+      elementosPorPagina,
+      type
+    )
 
     console.log(result.content)
     const faqFormatted = result?.content.reduce((accumulator, currentValue) => {
       const faqTable = {
         title: currentValue.title ? currentValue.title : '-',
-
-        /*enabled: (
-            <div>
-              <input type="checkbox" checked={currentValue.enabled} />
-              <label>{currentValue.enabled ? 'Ativo' : 'Inativo'} </label>
-            </div>
-          ),*/
         actions: (
           <div>
             <EditButtonUniversal
