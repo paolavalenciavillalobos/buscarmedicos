@@ -3,7 +3,9 @@ import styled from 'styled-components'
 export const DivForTable = styled.div`
   border-radius: 24px;
   box-shadow: 0px 0px 25px 0px #a3a3a333;
-  margin: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 0;
   padding: 1%;
   //width: 100%;
 `

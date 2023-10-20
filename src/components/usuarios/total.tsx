@@ -45,7 +45,7 @@ export const TableDashboard = ({
           let dataTemp: DataTempItem[] = []
           userData.content.forEach((item: UserData) => {
             dataTemp.push({
-              user: item.lastName,
+              user: `${item.firstName} ${item.lastName}`,
               email: item.email,
               whatsapp: item.phone,
               specialty:

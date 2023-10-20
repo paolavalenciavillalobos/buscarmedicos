@@ -11,6 +11,7 @@ import {
   PasswordBox
 } from '@/assets/styles/login'
 import { LoginPost } from '@/config/servicies'
+import { Checkbox, FormControlLabel, FormGroup } from '@mui/material'
 
 const Login = () => {
   const [email, setEmail] = useState<string>('')
@@ -50,13 +51,20 @@ const Login = () => {
             />
           </Input>
           <Box>
-            <label>
-              <input type="checkbox" />
-              Lembrar-me
-            </label>
+            <FormGroup>
+              <FormControlLabel
+                control={<Checkbox defaultChecked />}
+                label="Lembrar-me"
+              />
+            </FormGroup>
             <PasswordBox>Esqueci minha senha</PasswordBox>
           </Box>
-          <Button onClick={e => handleLoginSubmit(e)} type="button">
+          <Button
+            onClick={(e: { preventDefault: () => void }) =>
+              handleLoginSubmit(e)
+            }
+            type="button"
+          >
             Entrar
           </Button>
         </Container>

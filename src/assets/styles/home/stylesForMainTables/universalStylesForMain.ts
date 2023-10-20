@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 
 export const DivMainTitle = styled.div`
-  height: 10%;
+  //height: 10%;
   width: 100%;
   padding: 3%;
   margin-bottom: 5%;
 `
 export const MainTitle = styled.p`
   color: #212121;
-  font-family: Sora;
+  font-family: 'Sora';
   font-size: 32px;
   font-weight: 600;
   line-height: 48px;
@@ -19,7 +19,25 @@ export const HeaderOnTable = styled.div`
   height: 12%;
   margin: 1%;
   padding: 1%;
+  width: 100%;
   display: flex;
+  justify-content: space-between;
+`
+export const TotalNumber = styled.div`
+  font-family: 'Poppins';
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.20000000298023224px;
+  text-align: left;
+  margin-right: 1%;
+  display: flex;
+  flex-direction: column;
+  //margin: 0;
+  p {
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
 `
 export const Search = styled.div`
   width: 30%;
@@ -37,7 +55,7 @@ export const Search = styled.div`
     background: linear-gradient(0deg, #ffffff, #ffffff),
       linear-gradient(0deg, #e0e0e0, #e0e0e0);
     font-family: 'Poppins', sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     font-weight: 600;
     line-height: 1.5;
     letter-spacing: 0.2px;
@@ -47,7 +65,7 @@ export const Search = styled.div`
   img {
     position: absolute;
     left: 90%;
-    height: 60%;
+    height: 20px;
   }
 `
 
@@ -107,38 +125,41 @@ export const EditButtonUniversal = styled.button`
 export const DivForTabs = styled.div`
   height: 5%;
   width: 100%;
-  margin-bottom: 0%;
+  margin-bottom: 0;
   display: flex;
-  margin-left: 2%;
+  margin-left: 3.2%;
+  align-items: flex-end;
 `
-export const TabForSearchFilter = styled.button<{ isActive: boolean }>`
-  width: 172.32px;
+
+interface TabForSearchFilterProps {
+  isActive: boolean
+}
+
+export const TabForSearchFilter = styled.button<TabForSearchFilterProps>`
   display: flex;
-  height: 64.42px;
-  padding: 18px;
-  border-radius: 16px, 16px, 0px, 0px;
+  width: 20%;
+  padding: 2%;
+  border-radius: 16px 16px 0px 0px;
   gap: 18px;
-  border: 0%;
+  border: 0;
   background-color: ${props => (props.isActive ? '#ffffff' : '#f5f5f5')};
   box-shadow: 0px 0px 25px 0px #a3a3a333;
-  margin-right: 1%;
   p {
     font-family: 'Poppins';
     font-size: 20px;
     font-weight: 600;
     line-height: 28px;
-    letter-spacing: 0.20000000298023224px;
+    letter-spacing: 0.2px;
     text-align: left;
-    color: #212121;
+    //color: #212121;
     padding-left: 13%;
   }
   div {
-    width: 51.13px;
-    height: 28.18px;
-    padding: 4px, 12px, 4px, 12px;
+    display: flex;
+    align-items: center;
+    padding: 3%;
     border-radius: 100px;
     gap: 10px;
-
     background-color: ${props => (props.isActive ? '#046639' : '#B4E08E')};
     color: ${props => (props.isActive ? '#fffff' : '#212121')};
   }

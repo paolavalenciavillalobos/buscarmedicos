@@ -11,7 +11,8 @@ import {
   MainTitle,
   MenuSelectFilter,
   Search,
-  TabForSearchFilter
+  TabForSearchFilter,
+  TotalNumber
 } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import SearchIcon from '../../assets/images/search.png'
 import { MedicosUsers } from '@/components/usuarios/medicos'
@@ -30,10 +31,10 @@ export const UsuariosMain = ({ isActive }: Props) => {
   const [currentTab, setCurrentTab] = useState<
     'TODOS' | 'MEDICO' | 'CONTRATANTE'
   >('TODOS')
-  //const [todos, setTodos] = useState(true)
-  //const [medicos, setMedicos] = useState(false)
-  //const [contratante, setContratante] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
+  const [isActiveTodos, setIsActiveTodos] = useState(true)
+  const [isActiveMedico, setIsActiveMedico] = useState(false)
+  const [isActiveContratante, setIsActiveContratante] = useState(false)
   console.log(searchTerm)
   console.log(pagina)
 
@@ -58,16 +59,6 @@ export const UsuariosMain = ({ isActive }: Props) => {
     fetchData()
   }, [])
 
-  /*const handleTodosClick = () => {
-    console.log('Click en Todos')
-    setCurrentTab('TODOS')
-  }
-
-  const handleMedicosClick = () => {
-    console.log('Click')
-    setCurrentTab('MEDICO')
-  }*/
-
   return (
     <>
       <div>
@@ -79,27 +70,42 @@ export const UsuariosMain = ({ isActive }: Props) => {
         </DivMainTitle>
         <DivForTabs>
           <TabForSearchFilter
-            //isActive={currentTab === 'TODOS'}
+            $isActive={isActiveTodos}
             type="button"
             value={currentTab}
-            onClick={() => setCurrentTab('TODOS')}
+            onClick={() => {
+              setCurrentTab('TODOS')
+              setIsActiveTodos(true)
+              setIsActiveMedico(false)
+              setIsActiveContratante(false)
+            }}
           >
             <p>Todos</p>
             <div>{totalNumber.total}</div>
           </TabForSearchFilter>
           <TabForSearchFilter
-            //isActive={currentTab === 'CONTRATANTE'}
+            $isActive={isActiveMedico}
             type="button"
             value={currentTab}
-            onClick={() => setCurrentTab('MEDICO')}
+            onClick={() => {
+              setCurrentTab('MEDICO')
+              setIsActiveTodos(false)
+              setIsActiveMedico(true)
+              setIsActiveContratante(false)
+            }}
           >
             <p>Medico</p> <div>{totalNumber.totalDoctors}</div>
           </TabForSearchFilter>
           <TabForSearchFilter
-            //isActive={currentTab === 'CONTRATANTE'}
+            $isActive={isActiveContratante}
             type="button"
             value={currentTab}
-            onClick={() => setCurrentTab('CONTRATANTE')}
+            onClick={() => {
+              setCurrentTab('CONTRATANTE')
+              setIsActiveTodos(false)
+              setIsActiveMedico(false)
+              setIsActiveContratante(true)
+            }}
           >
             <p>Contratante</p> <div>{totalNumber.totalContractor}</div>
           </TabForSearchFilter>
@@ -115,7 +121,9 @@ export const UsuariosMain = ({ isActive }: Props) => {
               />
               <img src={SearchIcon} alt="search" />
             </Search>
-            <div>Total de usuarios: {totalNumber.total}</div>
+            <TotalNumber>
+              Total de usuarios: <p> {totalNumber.total} </p>
+            </TotalNumber>
           </HeaderOnTable>
           {currentTab === 'TODOS' ? (
             <TableDashboard

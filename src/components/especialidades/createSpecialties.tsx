@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { createPost } from '@/config/specialities'
 import {
   BodyForForm,
@@ -12,10 +12,14 @@ import {
   BackButton
 } from '@/assets/styles/inputs/editCreate'
 import leftSmall from '../../assets/images/left-small.png'
+import { FormControlLabel, FormGroup } from '@mui/material'
+import { IOSSwitch } from '../ui/toggleSwitch'
 
 export const CreateSpecialties = () => {
   const [name, setName] = useState<string>('')
   const [enabled, setEnabled] = useState<boolean>(false)
+
+  //Navigate = useNavigate
 
   const handleLoginSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
@@ -26,9 +30,16 @@ export const CreateSpecialties = () => {
     }
     const create = await createPost(data)
     console.log('user:', create)
-    // redirigir al usuario a otra página (status:inconcluso)
-    //navigate('/register')
+    //Navigate('/especialidades')
   }
+
+  /*<label htmlFor="description">Situação</label>
+              <label htmlFor="enabled">Ativo</label>
+              <input
+                id="enabled"
+                type="checkbox"
+                checked={enabled}
+                onChange={e => setEnabled(e.target.checked)}*/
 
   return (
     <>
@@ -54,13 +65,14 @@ export const CreateSpecialties = () => {
             </InputDados>
             <InputDados>
               <label htmlFor="description">Situação</label>
-              <label htmlFor="enabled">Ativo</label>
-              <input
-                id="enabled"
-                type="checkbox"
-                checked={enabled}
-                onChange={e => setEnabled(e.target.checked)}
-              />
+              <FormGroup>
+                <FormControlLabel
+                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                  checked={enabled}
+                  onChange={e => setEnabled(e.target.checked)}
+                  label="ativo"
+                />
+              </FormGroup>
             </InputDados>
           </BoxForForm>
           <ButtonInputsEditCreate type="submit">Salvar</ButtonInputsEditCreate>

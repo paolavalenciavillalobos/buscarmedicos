@@ -56,9 +56,27 @@ export const Text = styled.p`
   padding-bottom: 0;
 `
 export const Input = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0;
   width: 100%;
-  height: 8vh;
-  margin-top: 3%;
+  padding-right: 3%;
+  margin-top: 4%;
+  margin-bottom: 4%;
+  input {
+    border-radius: 16px;
+    border: 2px solid #e0e0e0;
+    padding: 4%;
+  }
+  label {
+    padding-bottom: 2%;
+    color: #757575;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.20000000298023224px;
+  }
 `
 export const Box = styled.div`
   display: flex;

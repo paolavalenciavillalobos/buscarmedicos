@@ -8,6 +8,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { DeleteSpecialties, GetSpecialties } from '@/config/specialities'
 import { EditButtonUniversal } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import Modal from './modal'
+import { FormControlLabel, FormGroup } from '@mui/material'
+import { IOSSwitch } from '../ui/toggleSwitch'
 
 type SpecialtiesTypo = {
   id?: string
@@ -24,7 +26,7 @@ export const SpecialtiesTable = ({
   setElementosPorPagina
 }: TableDashboardProps) => {
   const [specialties, setSpecialties] = useState<SpecialtiesTypo[]>([])
-  const [idToDelete, setIdToDelete] = useState<number>(undefined)
+  const [idToDelete, setIdToDelete] = useState<number | undefined>(undefined)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const openModal = () => {
@@ -51,6 +53,11 @@ export const SpecialtiesTable = ({
     }
   }
 
+  /*<div>
+              <input type="checkbox" checked={currentValue.enabled} />
+              <label>{currentValue.enabled ? 'Ativo' : 'Inativo'} </label>
+            </div>*/
+
   const fetchSpecialties = async () => {
     const result = await GetSpecialties(searchTerm, pagina, elementosPorPagina)
 
@@ -64,10 +71,13 @@ export const SpecialtiesTable = ({
           name: currentValue.name ? currentValue.name : '-',
 
           enabled: (
-            <div>
-              <input type="checkbox" checked={currentValue.enabled} />
-              <label>{currentValue.enabled ? 'Ativo' : 'Inativo'} </label>
-            </div>
+            <FormGroup>
+              <FormControlLabel
+                control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                checked={currentValue.enabled}
+                label={currentValue.enabled ? 'Ativo' : 'Inativo'}
+              />
+            </FormGroup>
           ),
           actions: (
             <div>

@@ -24,7 +24,6 @@ type datatypo = {
 }
 
 export const createPost = async (data: datatypo) => {
-  //console.log(data)
   try {
     const userData = await Api.post('/specialties', data, {
       headers: {
@@ -62,8 +61,6 @@ export const DeleteSpecialties = async (id: number) => {
     throw error
   }
 }
-
-//do a get only for id** ===>> (pero por alguna razon no funciona)
 
 export const GetbyidSpecialties = async (id: number) => {
   try {
