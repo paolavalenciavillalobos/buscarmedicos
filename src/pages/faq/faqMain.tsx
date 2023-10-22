@@ -26,7 +26,7 @@ export const FaqMain = ({ isActive }: Props) => {
   const [currentTab, setCurrentTab] = useState<'MEDICO' | 'CONTRATANTE'>(
     'MEDICO'
   )
-  const [isActiveMedico, setIsActiveMedico] = useState(false)
+  const [isActiveMedico, setIsActiveMedico] = useState(true)
   const [isActiveContratante, setIsActiveContratante] = useState(false)
 
   const { type } = useParams()

@@ -80,6 +80,7 @@ export const Input = styled.div`
 `
 export const Box = styled.div`
   display: flex;
+  text-align: center;
   justify-content: space-between;
   font-family: 'Poppins', sans-serif;
   margin-top: 2%;

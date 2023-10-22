@@ -1,25 +1,42 @@
 import styled from 'styled-components'
 
 export const ButtonUsers = styled.button`
-  width: 95%;
+  width: 100%;
   height: 30%;
+  text-align: left;
+  padding-left: 2%;
   margin: 2% 2% 2% 0;
   border-radius: 16px;
   border: none;
-  color: white;
-  background-color: #046639;
+  color: black;
+  // background-color: #046639;
   font-family: 'Poppins', sans-serif;
   padding: 1.5%;
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
   letter-spacing: 0.20000000298023224px;
+  background-color: ${props => (props.active ? '#046639' : '#EEEEEE')};
   //background: #EEEEEE;
 `
 
 export const BigBox = styled.div`
   display: flex;
   margin: 2%;
+  width: 100vh;
+  //justify-content: flex-start;
+`
+
+export const DivForComponent = styled.div`
+  width: 60vh;
+  margin-left: 8%;
+`
+
+export const ButtonBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 40vh;
+  padding: 1%;
 `
 
 export const InputDados = styled.div`
@@ -43,16 +60,50 @@ export const InputDados = styled.div`
     letter-spacing: 0.20000000298023224px;
   }
 `
-export const TitleForDados = styled.p`
-  border-bottom: 1.5px solid #bdbdbd;
+export const TitleForDadosUser = styled.p`
+  width: 100%;
   color: #212121;
   font-family: 'Sora', sans-serif;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 600;
   line-height: 28px;
   letter-spacing: 0.20000000298023224px;
   margin: 2%;
-  padding-bottom: 1.5%;
+  padding-bottom: 3%;
+`
+
+export const DataBoxUsers = styled.div`
+  width: 100%;
+  display: flex;
+  border-bottom: 1.5px solid #bdbdbd;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 2%;
+`
+
+export const PForFirstData = styled.p`
+  width: 33%;
+  text-align: left;
+  font-family: 'Poppins';
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0.20000000298023224px;
+  text-align: left;
+  margin-right: 18%;
+`
+
+export const PForSecondtData = styled.p`
+  text-align: left;
+  width: 33%;
+  font-family: 'Poppins';
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0.20000000298023224px;
+  text-align: left;
+  margin-right: 18%;
+  color: #616161;
 `
 
 export const BoxForForm = styled.div`
@@ -87,9 +138,70 @@ export const DivForTitle = styled.div`
   padding: 1%;
   display: flex;
 `
-export const ButtonBox = styled.div`
+export const EditButtonUser = styled.button`
+  width: 33%;
+  background-color: white;
+  border-radius: 10px;
+  border-color: #e0e0e0;
+  border-width: 1.3px;
+  border-style: solid;
+  padding: 2%;
+  //margin-left: 2%;
+  //margin-top: 5%;
+
+  margin-bottom: 5%;
+  box-shadow: 2px 2px 10px 0px #bbc0cd99;
+
+  img {
+    width: 70%;
+    height: 90%;
+  }
+`
+export const EditButtonUser1 = styled.button`
+  //width: 33%;
+  background-color: white;
+  border-radius: 10px;
+  border-color: #e0e0e0;
+  border-width: 1.3px;
+  border-style: solid;
+  padding: 2%;
+  //margin-left: 2%;
+  //margin-top: 5%;
+
+  margin-bottom: 5%;
+  box-shadow: 2px 2px 10px 0px #bbc0cd99;
+
+  img {
+    width: 70%;
+    height: 90%;
+  }
+`
+
+export const GreenButtonForUser = styled.button`
+  width: 60%;
+  //height: 100%;
+  padding: 4%;
+  border-radius: 16px;
+  background: #00c247;
+  color: white;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  margin-right: 2%;
+  padding: 0.8%;
   display: flex;
-  flex-direction: column;
-  width: 40%;
-  padding: 1%;
+  align-items: center;
+  justify-content: center;
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  img {
+    width: 8%;
+    height: 35%;
+    margin-right: 2%;
+  }
 `

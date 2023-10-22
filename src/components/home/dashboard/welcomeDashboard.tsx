@@ -10,6 +10,7 @@ import {
   WelcomeText
 } from '@/assets/styles/home/dashboard/dasboard'
 import Elipse from '../../../assets/images/Ellipse 149.png'
+import { ActualDay } from './dateComponent'
 
 export const WelcomeDashboard = () => {
   return (
@@ -24,7 +25,7 @@ export const WelcomeDashboard = () => {
         <HeaderCalendarWelcome>
           <SpanCalendar>
             <img src={Calendar} />
-            Hora
+            <ActualDay />
           </SpanCalendar>
           <WelcomeText>Seja bem-vinda!</WelcomeText>
           <SubtitleWelcome>

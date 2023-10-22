@@ -23,6 +23,11 @@ export const Header = () => {
     setIsModalOpen(false)
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    navigate('/login')
+  }
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -53,9 +58,18 @@ export const Header = () => {
           <p className="userName">{userData.name}</p>
           <p className="userEmail">{userData.email}</p>
         </EmailUser>
-        <Button onClick={() => openModal()}>
+        <button
+          style={{ border: 'none', background: 'white' }}
+          onClick={() => {
+            if (isModalOpen) {
+              closeModal()
+            } else {
+              openModal()
+            }
+          }}
+        >
           <img src={DownAround} alt="downaround" />
-        </Button>
+        </button>
       </HeaderStyle>
       <ModalMini isOpen={isModalOpen} onClose={closeModal}>
         <UserButton
@@ -66,11 +80,7 @@ export const Header = () => {
           <img src={UserModal} />
           Usuario
         </UserButton>
-        <UserButton
-          onClick={() => {
-            closeModal()
-          }}
-        >
+        <UserButton onClick={handleLogout}>
           <img src={Logout} />
           Sair
         </UserButton>

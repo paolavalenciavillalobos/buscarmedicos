@@ -9,6 +9,16 @@ export const DivForTable = styled.div`
   padding: 1%;
   //width: 100%;
 `
+export const TextNav = styled.p`
+  font-family: 'Poppins';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.20000000298023224px;
+  text-align: left;
+  color: #004ce8;
+  text-decoration: none;
+`
 export const DivForTitleOnTable = styled.div`
   //height: 12%;
   margin: 1%;

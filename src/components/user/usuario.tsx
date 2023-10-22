@@ -14,8 +14,14 @@ import {
 import {
   BigBox,
   ButtonBox,
+  DataBoxUsers,
+  DivForComponent,
+  EditButtonUser,
+  EditButtonUser1,
+  PForFirstData,
+  PForSecondtData,
   TitleEditCreate,
-  TitleForDados
+  TitleForDadosUser
 } from '@/assets/styles/users/users'
 
 export const Usuario = () => {
@@ -45,23 +51,29 @@ export const Usuario = () => {
 
   return (
     <>
-      <div>
-        <TitleForDados>Dados</TitleForDados>
-        <TitleForDados>
-          <p>Nome</p>
-          <p className="userName">{userData.name}</p>
-          <EditButtonUniversal onClick={() => navigate(`planos/editar/`)}>
+      <DivForComponent>
+        <TitleForDadosUser>Dados</TitleForDadosUser>
+
+        <DataBoxUsers>
+          <PForFirstData>Nome</PForFirstData>
+          <PForSecondtData className="userName">
+            {userData.name}
+          </PForSecondtData>
+          <EditButtonUser1 onClick={() => navigate(`planos/editar/`)}>
             <img src={EditButton} />
-          </EditButtonUniversal>
-        </TitleForDados>
-        <div>
-          <p>Email</p>
-          <p className="userEmail">{userData.email}</p>
-          <EditButtonUniversal onClick={() => navigate(`planos/editar/`)}>
+          </EditButtonUser1>
+        </DataBoxUsers>
+
+        <DataBoxUsers>
+          <PForFirstData>Email</PForFirstData>
+          <PForSecondtData className="userEmail">
+            {userData.email}
+          </PForSecondtData>
+          <EditButtonUser1 onClick={() => navigate(`planos/editar/`)}>
             <img src={EditButton} />
-          </EditButtonUniversal>
-        </div>
-      </div>
+          </EditButtonUser1>
+        </DataBoxUsers>
+      </DivForComponent>
     </>
   )
 }

@@ -54,7 +54,7 @@ const Login = () => {
             <FormGroup>
               <FormControlLabel
                 control={<Checkbox defaultChecked />}
-                label="Lembrar-me"
+                label={<PasswordBox>Lembrar-me</PasswordBox>}
               />
             </FormGroup>
             <PasswordBox>Esqueci minha senha</PasswordBox>

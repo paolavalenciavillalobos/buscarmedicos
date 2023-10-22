@@ -2,6 +2,7 @@ import {
   DivForTable,
   DivForTitleOnTable,
   Table,
+  TextNav,
   TitleForTableDashboard
 } from '@/assets/styles/home/dashboard/tableDashboard'
 import { Link } from 'react-router-dom'
@@ -50,7 +51,14 @@ export const TableDashboard = () => {
           <TitleForTableDashboard>
             Últimos usuários cadastrados
           </TitleForTableDashboard>
-          <p>Ver tudo</p>
+          <TextNav>
+            <Link
+              to="/usuarios"
+              style={{ textDecoration: 'none', color: '#004ce8' }}
+            >
+              Ver tudo
+            </Link>
+          </TextNav>
         </DivForTitleOnTable>
         <TableComponent HeadColumns={HeadColumns} BodyRow={userDataProcessed} />
       </DivForTable>
