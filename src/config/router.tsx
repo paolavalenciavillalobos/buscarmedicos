@@ -18,6 +18,7 @@ import { CreatePlans } from '@/components/planos/CreatePlans'
 import { Usuario } from '@/components/user/usuario'
 import { ViewSpecialties } from '@/components/especialidades/viewSpecialties'
 import { ViewFaq } from '@/components/faq/viewFaq'
+import { UsuarioMain } from '@/pages/usuario/usuarioMain'
 
 export default function Router() {
   return (
@@ -26,7 +27,7 @@ export default function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<BaseLayout />}>
           <Route index element={<DashboardMenu />} />
-          <Route path="/usuario" element={<Usuario />} />
+          <Route path="/usuario" element={<UsuarioMain />} />
           <Route path="/usuario/admin" element={<EditPlans />} />
           <Route path="/usuarios" element={<UsuariosMain isActive={false} />} />
           <Route path="/planos" element={<PlanosMain />} />

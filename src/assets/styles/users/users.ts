@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 
-export const ButtonInputsEditCreate = styled.button`
-  width: 30%;
+export const ButtonUsers = styled.button`
+  width: 95%;
+  height: 30%;
+  margin: 2% 2% 2% 0;
   border-radius: 16px;
   border: none;
   color: white;
@@ -17,6 +19,7 @@ export const ButtonInputsEditCreate = styled.button`
 
 export const BigBox = styled.div`
   display: flex;
+  margin: 2%;
 `
 
 export const InputDados = styled.div`
@@ -88,4 +91,5 @@ export const ButtonBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 40%;
+  padding: 1%;
 `
