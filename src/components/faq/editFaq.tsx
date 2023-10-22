@@ -13,10 +13,20 @@ import {
 import leftSmall from '../../assets/images/left-small.png'
 import { GetQuestions, GetbyidQuestions, UpdateFaq } from '@/config/faqServices'
 
+type datatypoFaq = {
+  title: string
+  message: string
+  type: string | undefined
+}
+
 export const EditQuestions = () => {
   const { id } = useParams<{ id?: string | undefined }>()
   const idAsNumber = !isNaN(Number(id)) ? Number(id) : null
-  const [faq, setFaq] = useState({ title: '', message: '' })
+  const [faq, setFaq] = useState<datatypoFaq>({
+    title: '',
+    message: '',
+    type: ''
+  })
 
   const navigate = useNavigate()
 
@@ -60,7 +70,8 @@ export const EditQuestions = () => {
       const updatedFaq = {
         id: idAsNumber,
         title: faq.title,
-        message: faq.message
+        message: faq.message,
+        type: faq.type
       }
 
       await UpdateFaq(idAsNumber, updatedFaq)
@@ -85,7 +96,7 @@ export const EditQuestions = () => {
           <TitleForForm>Dados da FAQ</TitleForForm>
           <BoxForForm>
             <InputDados>
-              <label htmlFor="name">titulo:</label>
+              <label htmlFor="name">Titulo</label>
               <input
                 type="text"
                 id="name"
@@ -101,6 +112,10 @@ export const EditQuestions = () => {
                 value={faq.message}
                 onChange={handleMessageChange}
               />
+            </InputDados>
+            <InputDados>
+              <label htmlFor="tipo">Tipo de usuario</label>
+              <input type="text" id="tipo" value={faq.type} disabled />
             </InputDados>
           </BoxForForm>
 

@@ -10,7 +10,7 @@ interface FaqApi extends GetApi {
     updatedBy: null
     title: string
     message: string
-    type: 'MEDICO' | 'CONTRATANTE'
+    type: string
   }[]
 }
 
@@ -40,6 +40,7 @@ export const GetQuestions = async (
 type datatypoFaq = {
   title: string
   message: string
+  type: string | undefined
 }
 
 export const createFaqService = async (data: datatypoFaq) => {
