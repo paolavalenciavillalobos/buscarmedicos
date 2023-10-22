@@ -16,7 +16,7 @@ import { GetQuestions, GetbyidQuestions, UpdateFaq } from '@/config/faqServices'
 type datatypoFaq = {
   title: string
   message: string
-  type: string | undefined
+  type: string
 }
 
 export const EditQuestions = () => {
