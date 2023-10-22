@@ -48,7 +48,7 @@ export default function Router() {
           <Route path="/notificacoes" element={<NotificationsMain />} />
           <Route path="/notificacoes-criar" element={<CreateNotifications />} />
           <Route path="/notificacoes/:id" element={<EditNotifications />} />
-          <Route path="/faq" element={<FaqMain />} />
+          <Route path="/faq" element={<FaqMain isActive={false} />} />
           <Route path="/faq-criar/:type" element={<CreateFaqs />} />
           <Route path="/faq/edit/:id" element={<EditQuestions />} />
           <Route path="/faq/view/:id" element={<ViewFaq />} />

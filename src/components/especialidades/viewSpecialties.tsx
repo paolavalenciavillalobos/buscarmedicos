@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { GetSpecialties, GetbyidSpecialties } from '@/config/specialities'
 import {
   BodyForForm,
-  BoxForForm,
-  ButtonInputsEditCreate,
-  InputDados,
   TitleForForm,
   TitleEditCreate,
   DivForTitle,
-  BackButton
+  BackButton,
+  InputDadosView,
+  BoxForFormView
 } from '@/assets/styles/inputs/editCreate'
 import leftSmall from '../../assets/images/left-small.png'
 
 export const ViewSpecialties = () => {
   const { id } = useParams<string>()
-  const [specialty, setSpecialty] = useState(null)
+  const [specialty, setSpecialty] = useState<SpecialtiesGetTypo>()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,20 +43,22 @@ export const ViewSpecialties = () => {
     <>
       <DivForTitle>
         <BackButton>
-          <img src={leftSmall} />
+          <Link to={'/especialidades'}>
+            <img src={leftSmall} />
+          </Link>
         </BackButton>
         <TitleEditCreate> Ver especialidade</TitleEditCreate>
       </DivForTitle>
       <form>
         <BodyForForm>
           <TitleForForm>Dados da especialidade</TitleForForm>
-          <BoxForForm>
+          <BoxForFormView>
             <div style={{ display: 'flex', width: '100%' }}>
-              <InputDados>
+              <InputDadosView>
                 <label htmlFor="name">Nome</label>
                 <input id="name" type="text" value={specialty.name} disabled />
-              </InputDados>
-              <InputDados>
+              </InputDadosView>
+              <InputDadosView>
                 <label htmlFor="enabled">Situação</label>
                 <input
                   id="enabled"
@@ -65,10 +66,10 @@ export const ViewSpecialties = () => {
                   value={specialty.createdAt}
                   disabled
                 />
-              </InputDados>
+              </InputDadosView>
             </div>
             <div style={{ display: 'flex' }}>
-              <InputDados>
+              <InputDadosView>
                 <label htmlFor="create">Data de criação</label>
                 <input
                   id="create"
@@ -76,8 +77,8 @@ export const ViewSpecialties = () => {
                   value={specialty.createdAt}
                   disabled
                 />
-              </InputDados>
-              <InputDados>
+              </InputDadosView>
+              <InputDadosView>
                 <label htmlFor="edit">Data de edição</label>
                 <input
                   id="edit"
@@ -85,9 +86,9 @@ export const ViewSpecialties = () => {
                   value={specialty.updatedAt}
                   disabled
                 />
-              </InputDados>
+              </InputDadosView>
             </div>
-          </BoxForForm>
+          </BoxForFormView>
         </BodyForForm>
       </form>
     </>

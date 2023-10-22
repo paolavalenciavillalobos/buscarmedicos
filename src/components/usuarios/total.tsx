@@ -1,4 +1,4 @@
-import { GetLastUsers } from '@/config/servicies'
+import { GetLastUsers } from '@/config/usersServicies'
 import { useEffect, useState } from 'react'
 import { TableComponent } from '@/components/table/table'
 
@@ -7,15 +7,14 @@ interface TableDashboardProps {
   pagina: number
   elementosPorPagina: number
   setPagina: (pagina: number) => void
-  setElementosPorPagina: (elementosPorPagina: number) => void
+  setElementosPorPagina?: (elementosPorPagina: number) => void
 }
 
 export const TableDashboard = ({
   searchTerm,
   pagina,
   elementosPorPagina,
-  setPagina,
-  setElementosPorPagina
+  setPagina
 }: TableDashboardProps) => {
   const HeadColumns = [
     'Usuário',
@@ -32,41 +31,43 @@ export const TableDashboard = ({
     Array<DataTempItem>
   >([])
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userData = await GetLastUsers(
-          searchTerm,
-          pagina,
-          elementosPorPagina
-        )
-        if (userData) {
-          setUserData(userData.content)
-          let dataTemp: DataTempItem[] = []
-          userData.content.forEach((item: UserData) => {
-            dataTemp.push({
-              user: `${item.firstName} ${item.lastName}`,
-              email: item.email,
-              whatsapp: item.phone,
-              specialty:
-                item.specialties.length > 0 ? item.specialties[0].name : '-',
-              city:
-                item?.address?.city.length > 0 ? item.specialties[0].name : '-',
-              uf:
-                item?.address?.state.length > 0
-                  ? item.specialties[0].name
-                  : '-',
-              userType: item.profiles.length > 0 ? item.profiles[0].name : '-'
-            })
+  const fetchData = async () => {
+    try {
+      const userData = await GetLastUsers(
+        searchTerm,
+        pagina,
+        elementosPorPagina
+      )
+      if (userData) {
+        setUserData(userData.content)
+        let dataTemp: DataTempItem[] = []
+        userData.content.forEach((item: UserData) => {
+          dataTemp.push({
+            user: `${item.firstName} ${item.lastName}`,
+            email: item.email,
+            whatsapp: item.phone,
+            specialty:
+              item.specialties.length > 0 ? item.specialties[0].name : '-',
+            city:
+              item?.address?.city.length > 0 ? item.specialties[0].name : '-',
+            uf:
+              item?.address?.state.length > 0 ? item.specialties[0].name : '-',
+            userType: item.profiles.length > 0 ? item.profiles[0].name : '-'
           })
-          setUserDataProcessed(dataTemp)
-          console.log(userData.content)
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error)
+        })
+        setUserDataProcessed(dataTemp)
+        console.log(userData.content)
       }
+    } catch (error) {
+      console.error('Error fetching data:', error)
     }
+  }
 
+  useEffect(() => {
+    setPagina?.(0)
+  }, [searchTerm])
+
+  useEffect(() => {
     fetchData()
   }, [searchTerm, pagina, elementosPorPagina])
 

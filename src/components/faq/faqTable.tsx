@@ -7,12 +7,16 @@ import VisualizerButton from '../../assets/images/visualize.png'
 import { useNavigate } from 'react-router-dom'
 import { EditButtonUniversal } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import { DeleteFaq, GetQuestions } from '@/config/faqServices'
-import Modal from '../especialidades/modal'
+import Modal from '../modal/modal'
+import {
+  BackRedButton,
+  CloseButton,
+  GreenButtonForDelete
+} from '@/assets/styles/modal/modal'
 
 type FaqTypo = {
   id?: number
   title: string
-  enabled?: ReactNode
   actions: ReactNode
 }
 
@@ -21,14 +25,15 @@ export const Medicosfaq = ({
   pagina,
   elementosPorPagina,
   setPagina,
-  setElementosPorPagina,
   type
 }: TableDashboardProps) => {
   const [faq, setFaq] = useState<FaqTypo[]>([])
 
   const tableColumns = ['Nome', 'Ações']
-  const [idToDelete, setIdToDelete] = useState<number>(undefined)
+  const [idToDelete, setIdToDelete] = useState<number | undefined>(undefined)
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const navigate = useNavigate()
 
   const openModal = () => {
     setIsModalOpen(true)
@@ -38,17 +43,16 @@ export const Medicosfaq = ({
     setIsModalOpen(false)
   }
 
-  const handleDelete = async id => {
+  const handleDelete = async (id: number) => {
     try {
       await DeleteFaq(id)
       setFaq(prevfaq => prevfaq.filter(i => i.id !== id))
       setIdToDelete(undefined) // Restablece idToDelete a undefined
+      navigate('/faq')
     } catch (error) {
       console.error('Error deleting specialty:', error)
     }
   }
-
-  const navigate = useNavigate()
 
   const fetchFaq = async () => {
     const result = await GetQuestions(
@@ -87,13 +91,13 @@ export const Medicosfaq = ({
       }
       console.log(faq)
       return [...accumulator, faqTable]
-    }, [])
+    }, [] as FaqTypo[])
 
     setFaq(faqFormatted ?? [])
   }
 
   useEffect(() => {
-    setPagina(0)
+    setPagina?.(0)
   }, [searchTerm])
 
   useEffect(() => {
@@ -105,17 +109,32 @@ export const Medicosfaq = ({
       <TableComponent HeadColumns={tableColumns} BodyRow={faq} />
       <div className="screen">
         <Modal isOpen={isModalOpen} onClose={closeModal}>
-          <p>Contenido del modal.</p>
-          <button
-            onClick={() => {
-              handleDelete(idToDelete)
-              fetchFaq()
-              closeModal()
-            }}
-          >
-            Eliminar
-          </button>
-          <button onClick={closeModal}>Cerrar Modal</button>
+          <CloseButton onClick={closeModal}>x</CloseButton>
+          <p>
+            Tem certeza que deseja{' '}
+            <span
+              style={{
+                color: 'red',
+                textDecoration: 'underline',
+                textDecorationColor: 'red'
+              }}
+            >
+              excluir
+            </span>{' '}
+            este item?
+          </p>
+          <div>
+            <GreenButtonForDelete
+              onClick={() => {
+                handleDelete(idToDelete ?? 0)
+                closeModal()
+                fetchFaq()
+              }}
+            >
+              Sim, excluir item
+            </GreenButtonForDelete>
+          </div>
+          <BackRedButton onClick={closeModal}>Voltar</BackRedButton>
         </Modal>
       </div>
     </>

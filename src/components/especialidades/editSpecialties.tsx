@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
   GetbyidSpecialties,
   UpdateSpecialties
@@ -15,15 +15,24 @@ import {
   BackButton
 } from '@/assets/styles/inputs/editCreate'
 import leftSmall from '../../assets/images/left-small.png'
+import { IOSSwitch } from '../ui/toggleSwitch'
+import { FormControlLabel, FormGroup } from '@mui/material'
 
 export const EditSpecialties = () => {
-  const { id } = useParams()
+  const { id } = useParams<{ id?: string | undefined }>()
+  const idAsNumber = !isNaN(Number(id)) ? Number(id) : null
   const [specialty, setSpecialty] = useState({ name: '', enabled: false })
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!idAsNumber) {
+        console.error('ID is undefined')
+        return
+      }
       try {
-        const response = await GetbyidSpecialties(id)
+        const response = await GetbyidSpecialties(idAsNumber)
         if (response) {
           setSpecialty(response)
         } else {
@@ -46,26 +55,32 @@ export const EditSpecialties = () => {
   }
 
   const handleUpdate = async () => {
+    if (!idAsNumber) {
+      console.error('ID is undefined')
+      return
+    }
+
     try {
       const updatedSpecialty = {
-        id: Number(id),
+        id: idAsNumber,
         name: specialty.name,
         enabled: specialty.enabled
       }
 
-      await UpdateSpecialties(id, updatedSpecialty) // Actualiza la especialidad con los nuevos datos
-      alert('Especialidad actualizada correctamente')
+      await UpdateSpecialties(idAsNumber, updatedSpecialty)
+      navigate('/especialidades')
     } catch (error) {
       console.error('Error updating data:', error)
-      alert('Error al actualizar la especialidad')
+      alert('Aconteceu um erro')
     }
   }
-
   return (
     <>
       <DivForTitle>
         <BackButton>
-          <img src={leftSmall} />
+          <Link to={'/especialidades'}>
+            <img src={leftSmall} />
+          </Link>
         </BackButton>
         <TitleEditCreate> Editar especialidade</TitleEditCreate>
       </DivForTitle>
@@ -84,13 +99,14 @@ export const EditSpecialties = () => {
             </InputDados>
             <InputDados>
               <label htmlFor="description">Situação</label>
-              <label htmlFor="enabled">Ativo</label>
-              <input
-                type="checkbox"
-                id="enabled"
-                checked={specialty.enabled}
-                onChange={handleEnabledChange}
-              />
+              <FormGroup>
+                <FormControlLabel
+                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                  checked={specialty.enabled}
+                  onChange={handleEnabledChange}
+                  label={specialty.enabled ? 'Ativo' : 'Inativo'}
+                />
+              </FormGroup>
             </InputDados>
           </BoxForForm>
 

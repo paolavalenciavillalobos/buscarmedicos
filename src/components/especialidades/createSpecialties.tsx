@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { createPost } from '@/config/specialities'
 import {
   BodyForForm,
@@ -14,38 +14,43 @@ import {
 import leftSmall from '../../assets/images/left-small.png'
 import { FormControlLabel, FormGroup } from '@mui/material'
 import { IOSSwitch } from '../ui/toggleSwitch'
+import Modal from '../modal/modal'
+import { CloseButton } from '@/assets/styles/modal/modal'
 
 export const CreateSpecialties = () => {
   const [name, setName] = useState<string>('')
   const [enabled, setEnabled] = useState<boolean>(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  //Navigate = useNavigate
+  const openModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    navigate('/especialidades')
+  }
+
+  const navigate = useNavigate()
 
   const handleLoginSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    // Crear el objeto de datos a enviar al servidor
     const data = {
-      name: name, // Establece el nombre según el estado
-      enabled: enabled // Establece la actividad según el estado
+      name: name,
+      enabled: enabled
     }
     const create = await createPost(data)
     console.log('user:', create)
-    //Navigate('/especialidades')
+    openModal()
   }
-
-  /*<label htmlFor="description">Situação</label>
-              <label htmlFor="enabled">Ativo</label>
-              <input
-                id="enabled"
-                type="checkbox"
-                checked={enabled}
-                onChange={e => setEnabled(e.target.checked)}*/
 
   return (
     <>
       <DivForTitle>
         <BackButton>
-          <img src={leftSmall} />
+          <Link to={'/especialidades'}>
+            <img src={leftSmall} />
+          </Link>
         </BackButton>
         <TitleEditCreate> Nova especialidade</TitleEditCreate>
       </DivForTitle>
@@ -70,7 +75,7 @@ export const CreateSpecialties = () => {
                   control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
                   checked={enabled}
                   onChange={e => setEnabled(e.target.checked)}
-                  label="ativo"
+                  label={enabled ? 'Ativo' : 'Inativo'}
                 />
               </FormGroup>
             </InputDados>
@@ -78,6 +83,16 @@ export const CreateSpecialties = () => {
           <ButtonInputsEditCreate type="submit">Salvar</ButtonInputsEditCreate>
         </BodyForForm>
       </form>
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <CloseButton
+          onClick={() => {
+            closeModal()
+          }}
+        >
+          x
+        </CloseButton>
+        <p>Especialidade salva com sucesso!</p>
+      </Modal>
     </>
   )
 }

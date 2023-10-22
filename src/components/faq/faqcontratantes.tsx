@@ -7,7 +7,7 @@ import VisualizerButton from '../../assets/images/visualize.png'
 import { useNavigate } from 'react-router-dom'
 import { EditButtonUniversal } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import { DeleteFaq, GetQuestions } from '@/config/faqServices'
-import Modal from '../especialidades/modal'
+import Modal from '../modal/modal'
 
 type FaqTypo = {
   id?: number
@@ -92,7 +92,7 @@ export const FaqContratantes = ({
   }
 
   useEffect(() => {
-    setPagina(0)
+    setPagina?.(0)
   }, [searchTerm])
 
   useEffect(() => {

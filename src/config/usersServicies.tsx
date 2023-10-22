@@ -40,21 +40,21 @@ export const GetLastUsersDashboard = async () => {
 export const GetLastUsers = async (
   searchTerm: string | null,
   pagina: number,
-  elementosPorPagina: number
+  elementosPorPagina?: number
 ) => {
   try {
-    let pesquisar = ''
-    if (searchTerm) {
-      pesquisar = `&search=${searchTerm}`
-    }
-    const pageParam =
-      pagina && elementosPorPagina
-        ? `?page=${pagina}&size=${elementosPorPagina}`
-        : ''
-    console.log(pageParam)
+    console.log(
+      'search:',
+      searchTerm,
+      'page:',
+      pagina,
+      'size:',
+      elementosPorPagina
+    )
     const token = localStorage.getItem('token')
-    const usersDashboard = await Api.get(`/users${pageParam}${pesquisar}`, {
-      headers: { Authorization: token }
+    const usersDashboard = await Api.get(`/users`, {
+      headers: { Authorization: token },
+      params: { page: pagina, size: elementosPorPagina, search: searchTerm }
     })
     return usersDashboard.data
   } catch (error) {
@@ -62,32 +62,59 @@ export const GetLastUsers = async (
   }
 }
 
-/*export const UpdateCard = async (
-  id: string,
-  data: UpdateType
-): Promise<CardsType> => {
+export const GetLastUsersMEDICO = async (
+  searchTerm: string,
+  pagina: number,
+  elementosPorPagina?: number
+) => {
   try {
+    console.log(
+      'search:',
+      searchTerm,
+      'page:',
+      pagina,
+      'size:',
+      elementosPorPagina
+    )
     const token = localStorage.getItem('token')
-    const cardsFromId = await Api.put(`/api/card/${id}`, data, {
-      headers: { Authorization: token }
+    console.log(token)
+    const usersDashboard = await Api.get(`/users/profile?type=MEDICO`, {
+      headers: { Authorization: token },
+      params: { page: pagina, size: elementosPorPagina, search: searchTerm }
     })
-    return cardsFromId.data
+    console.log(usersDashboard)
+    return usersDashboard.data
   } catch (error) {
     throw error
   }
-}*/
+}
 
-/*export const DeleteCard = async (id: string) => {
+export const GetLastUsersCONTRATANTE = async (
+  searchTerm: string,
+  pagina: number,
+  elementosPorPagina?: number
+) => {
   try {
+    console.log(
+      'search:',
+      searchTerm,
+      'page:',
+      pagina,
+      'size:',
+      elementosPorPagina
+    )
     const token = localStorage.getItem('token')
-    const cardsFromId = await Api.delete(`/api/card/${id}`, {
-      headers: { Authorization: token }
+    console.log(token)
+    const usersDashboard = await Api.get(`/users/profile?type=contratante`, {
+      headers: { Authorization: token },
+      params: { page: pagina, size: elementosPorPagina, search: searchTerm }
     })
-    return cardsFromId.data
+    console.log(usersDashboard)
+    return usersDashboard.data
   } catch (error) {
     throw error
   }
-}*/
+}
 
 type LoginApi = {
   token: string
@@ -102,7 +129,6 @@ export const LoginPost = async (email: string, password: string) => {
     )
 
     const token = userData.data.token
-    //const userName = userData.data.name
 
     localStorage.setItem('token', token)
     return token

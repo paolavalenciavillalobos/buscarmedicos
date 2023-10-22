@@ -1,68 +1,114 @@
-import { GetQuestions, UpdateFaq } from '@/config/faqServices'
-import { GetSpecialties, UpdateSpecialties } from '@/config/specialities'
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import {
+  BodyForForm,
+  BoxForForm,
+  ButtonInputsEditCreate,
+  InputDados,
+  TitleForForm,
+  TitleEditCreate,
+  DivForTitle,
+  BackButton
+} from '@/assets/styles/inputs/editCreate'
+import leftSmall from '../../assets/images/left-small.png'
+import { GetQuestions, GetbyidQuestions, UpdateFaq } from '@/config/faqServices'
 
 export const EditQuestions = () => {
-  const { id } = useParams()
+  const { id } = useParams<{ id?: string | undefined }>()
+  const idAsNumber = !isNaN(Number(id)) ? Number(id) : null
+  const [faq, setFaq] = useState({ title: '', message: '' })
 
-  const [title, setTitle] = useState<string>('')
-  const [message, setMessage] = useState<string>('')
-  const [isError, setIsError] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!idAsNumber) {
+        console.error('ID is undefined')
+        return
+      }
       try {
-        const response = await GetQuestions(id)
-
+        const response = await GetbyidQuestions(idAsNumber)
         if (response) {
-          setTitle(response.title)
-          setMessage(response.Message)
+          setFaq(response)
+          console.log(response)
+        } else {
+          console.error(` id ${id} not found`)
         }
       } catch (error) {
         console.error('Error fetching data:', error)
-        setIsError(true)
       }
     }
 
     fetchData()
   }, [id])
 
-  const handleSubmit = async event => {
-    event.preventDefault()
+  const handleTitleChange = event => {
+    setFaq({ ...faq, title: event.target.value })
+  }
+
+  const handleMessageChange = () => {
+    setFaq({ ...faq, message: event.target.value })
+  }
+
+  const handleUpdate = async () => {
+    if (!idAsNumber) {
+      console.error('ID is undefined')
+      return
+    }
 
     try {
-      await UpdateFaq(id, { title, message })
+      const updatedFaq = {
+        id: idAsNumber,
+        title: faq.title,
+        message: faq.message
+      }
+
+      await UpdateFaq(idAsNumber, updatedFaq)
+      navigate('/faq')
     } catch (error) {
       console.error('Error updating data:', error)
+      alert('aconteceu algum erro')
     }
   }
-
-  if (isError) {
-    return <p>Error loading data.</p>
-  }
-
   return (
-    <div>
-      <h3>Edit Pergunta</h3>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Titulo</label>
-        <p>{title}</p>
-        <input
-          id="title"
-          type="text"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
-        <label htmlFor="message">Mensagem</label>
-        <input
-          id="message"
-          type="text"
-          value={message}
-          onChange={e => setMessage(e.target.value)}
-        />
-        <button type="submit">Salvar</button>
+    <>
+      <DivForTitle>
+        <BackButton>
+          <Link to={'/faq'}>
+            <img src={leftSmall} />
+          </Link>
+        </BackButton>
+        <TitleEditCreate> Editar Faq</TitleEditCreate>
+      </DivForTitle>
+      <form>
+        <BodyForForm>
+          <TitleForForm>Dados da FAQ</TitleForForm>
+          <BoxForForm>
+            <InputDados>
+              <label htmlFor="name">titulo:</label>
+              <input
+                type="text"
+                id="name"
+                value={faq.title}
+                onChange={handleTitleChange}
+              />
+            </InputDados>
+            <InputDados>
+              <label htmlFor="description">Message</label>
+              <input
+                type="text"
+                id="name"
+                value={faq.message}
+                onChange={handleMessageChange}
+              />
+            </InputDados>
+          </BoxForForm>
+
+          <ButtonInputsEditCreate type="button" onClick={handleUpdate}>
+            Salvar
+          </ButtonInputsEditCreate>
+        </BodyForForm>
       </form>
-    </div>
+    </>
   )
 }

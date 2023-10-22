@@ -1,4 +1,18 @@
 import Api from '../Api'
+import { AxiosResponse } from 'axios'
+
+interface FaqApi extends GetApi {
+  content: {
+    id: number
+    createdAt: string
+    updatedAt: string
+    createdBy: null
+    updatedBy: null
+    title: string
+    message: string
+    type: 'MEDICO' | 'CONTRATANTE'
+  }[]
+}
 
 export const GetQuestions = async (
   searchTerm?: string | null,
@@ -8,7 +22,7 @@ export const GetQuestions = async (
 ) => {
   try {
     const token = localStorage.getItem('token')
-    const dataGet = await Api.get(`/questions`, {
+    const dataGet: AxiosResponse<FaqApi> = await Api.get(`/questions`, {
       headers: { Authorization: token },
       params: {
         page: pagina,

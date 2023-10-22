@@ -19,15 +19,17 @@ import { MedicosUsers } from '@/components/usuarios/medicos'
 import { useEffect, useState } from 'react'
 import { TableDashboard } from '@/components/usuarios/total'
 import { ContratantesUsers } from '@/components/usuarios/contratantes'
-import { GetUsersCount } from '@/config/servicies'
+import { GetUsersCount } from '@/config/usersServicies'
+import PaginationRounded from '@/components/ui/paginacao'
+import { Pagination } from '@mui/material'
 
 interface Props {
   isActive: boolean
 }
 
 export const UsuariosMain = ({ isActive }: Props) => {
-  const [pagina, setPagina] = useState(1)
-  const [elementosPorPagina, setElementosPorPagina] = useState(10)
+  const [pagina, setPagina] = useState(0)
+  //const [elementosPorPagina, setElementosPorPagina] = useState(10)
   const [currentTab, setCurrentTab] = useState<
     'TODOS' | 'MEDICO' | 'CONTRATANTE'
   >('TODOS')
@@ -37,6 +39,8 @@ export const UsuariosMain = ({ isActive }: Props) => {
   const [isActiveContratante, setIsActiveContratante] = useState(false)
   console.log(searchTerm)
   console.log(pagina)
+
+  const elementosPorPagina = 10
 
   const [totalNumber, setTotalNumber] = useState({
     total: 0,
@@ -65,12 +69,12 @@ export const UsuariosMain = ({ isActive }: Props) => {
         <DivMainTitle>
           <MainTitle>
             Usuários Cadastrados|{' '}
-            {currentTab === 'TODOS' ? 'Todos' : 'Contratante'}
+            {currentTab === 'TODOS' ? 'Todos' : currentTab}
           </MainTitle>
         </DivMainTitle>
         <DivForTabs>
           <TabForSearchFilter
-            $isActive={isActiveTodos}
+            isActive={isActiveTodos}
             type="button"
             value={currentTab}
             onClick={() => {
@@ -84,7 +88,7 @@ export const UsuariosMain = ({ isActive }: Props) => {
             <div>{totalNumber.total}</div>
           </TabForSearchFilter>
           <TabForSearchFilter
-            $isActive={isActiveMedico}
+            isActive={isActiveMedico}
             type="button"
             value={currentTab}
             onClick={() => {
@@ -97,7 +101,7 @@ export const UsuariosMain = ({ isActive }: Props) => {
             <p>Medico</p> <div>{totalNumber.totalDoctors}</div>
           </TabForSearchFilter>
           <TabForSearchFilter
-            $isActive={isActiveContratante}
+            isActive={isActiveContratante}
             type="button"
             value={currentTab}
             onClick={() => {
@@ -131,19 +135,37 @@ export const UsuariosMain = ({ isActive }: Props) => {
               pagina={pagina}
               elementosPorPagina={elementosPorPagina}
               setPagina={setPagina}
-              setElementosPorPagina={setElementosPorPagina}
             />
           ) : currentTab === 'MEDICO' ? (
-            <MedicosUsers searchTerm={searchTerm} />
+            <MedicosUsers
+              searchTerm={searchTerm}
+              pagina={pagina}
+              elementosPorPagina={elementosPorPagina}
+              setPagina={setPagina}
+            />
           ) : (
             currentTab === 'CONTRATANTE' && (
-              <ContratantesUsers searchTerm={searchTerm} />
+              <ContratantesUsers
+                searchTerm={searchTerm}
+                pagina={pagina}
+                elementosPorPagina={elementosPorPagina}
+                setPagina={setPagina}
+              />
             )
           )}
-          <button onClick={() => setPagina(pagina - 1)} disabled={pagina === 1}>
-            Anterior
-          </button>
-          <button onClick={() => setPagina(pagina + 1)}>Siguiente</button>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Pagination
+              count={4}
+              page={pagina}
+              onChange={(event, value) => setPagina(value)}
+              sx={{
+                '&.Mui-selected': {
+                  backgroundColor: '#046639',
+                  color: '#ffffff'
+                }
+              }}
+            />
+          </div>
         </DivForTable>
       </div>
     </>

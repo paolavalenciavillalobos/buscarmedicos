@@ -1,5 +1,8 @@
 type UserData = {
+  id?: number
   name: string
+  firstName: string
+  lastName: string
   email: string
   phone: string
   specialties: Array<{ name: string }>
@@ -7,7 +10,7 @@ type UserData = {
     city: string
     uf: string
   }
-  profiles: Array<{ name: string }>
+  profiles?: Array<{ name: string }>
 }
 
 type DataTempItem = {
@@ -17,7 +20,7 @@ type DataTempItem = {
   specialty?: string
   city?: string
   uf?: string
-  userType: string
+  userType?: string
 }
 
 type Profile = {
@@ -27,7 +30,7 @@ type Profile = {
 }
 
 type User = {
-  id: number
+  id: number | undefined
   firstName: string
   lastName: string
   phone: string
@@ -39,8 +42,36 @@ type User = {
 interface TableDashboardProps {
   searchTerm: string
   pagina: number
-  elementosPorPagina?: number
+  elementosPorPagina: number
   setPagina?: (pagina: number) => void
-  setElementosPorPagina?: (elementosPorPagina: number) => void
+  //setElementosPorPagina?: (elementosPorPagina: number) => void
   type?: string
+}
+
+interface GetApi {
+  pageable: {
+    pageNumber: number
+    pageSize: number
+    sort: {
+      empty: boolean
+      unsorted: boolean
+      sorted: boolean
+    }
+    offset: number
+    paged: boolean
+    unpaged: boolean
+  }
+  last: boolean
+  totalPages: number
+  totalElements: number
+  size: number
+  number: number
+  sort: {
+    empty: boolean
+    unsorted: boolean
+    sorted: boolean
+  }
+  first: boolean
+  numberOfElements: number
+  empty: boolean
 }

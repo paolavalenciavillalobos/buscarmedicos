@@ -14,7 +14,7 @@ import {
   TotalNumDiv,
   TotalTitle
 } from '@/assets/styles/home/dashboard/dasboard'
-import { GetUsersDashboard } from '@/config/servicies'
+import { GetUsersDashboard } from '@/config/usersServicies'
 import { useState, useEffect } from 'react'
 
 export const CountDashboard = () => {

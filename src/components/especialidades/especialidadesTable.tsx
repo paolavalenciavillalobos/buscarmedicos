@@ -6,13 +6,21 @@ import VisualizerButton from '../../assets/images/visualize.png'
 
 import { useNavigate, useParams } from 'react-router-dom'
 import { DeleteSpecialties, GetSpecialties } from '@/config/specialities'
-import { EditButtonUniversal } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
-import Modal from './modal'
+import {
+  EditButtonUniversal,
+  GreenButtonForAdd
+} from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
+import Modal from '../modal/modal'
 import { FormControlLabel, FormGroup } from '@mui/material'
 import { IOSSwitch } from '../ui/toggleSwitch'
+import {
+  BackRedButton,
+  CloseButton,
+  GreenButtonForDelete
+} from '@/assets/styles/modal/modal'
 
 type SpecialtiesTypo = {
-  id?: string
+  id?: number
   name: string
   enabled: ReactNode
   actions: ReactNode
@@ -22,8 +30,7 @@ export const SpecialtiesTable = ({
   searchTerm,
   pagina,
   elementosPorPagina,
-  setPagina,
-  setElementosPorPagina
+  setPagina
 }: TableDashboardProps) => {
   const [specialties, setSpecialties] = useState<SpecialtiesTypo[]>([])
   const [idToDelete, setIdToDelete] = useState<number | undefined>(undefined)
@@ -41,22 +48,18 @@ export const SpecialtiesTable = ({
 
   const navigate = useNavigate()
 
-  const handleDelete = async id => {
+  const handleDelete = async (id: number) => {
     try {
       await DeleteSpecialties(id)
       setSpecialties(prevSpecialties =>
         prevSpecialties.filter(i => i.id !== id)
       )
       setIdToDelete(undefined) // Restablece idToDelete a undefined
+      navigate('/especialidades')
     } catch (error) {
       console.error('Error deleting specialty:', error)
     }
   }
-
-  /*<div>
-              <input type="checkbox" checked={currentValue.enabled} />
-              <label>{currentValue.enabled ? 'Ativo' : 'Inativo'} </label>
-            </div>*/
 
   const fetchSpecialties = async () => {
     const result = await GetSpecialties(searchTerm, pagina, elementosPorPagina)
@@ -105,14 +108,14 @@ export const SpecialtiesTable = ({
         //console.log(specialties)
         return [...accumulator, specialtiesTable]
       },
-      []
+      [] as SpecialtiesTypo[]
     )
 
     setSpecialties(specialtiesFormatted ?? [])
   }
 
   useEffect(() => {
-    setPagina(0)
+    setPagina?.(0)
   }, [searchTerm])
 
   useEffect(() => {
@@ -124,17 +127,32 @@ export const SpecialtiesTable = ({
       <TableComponent HeadColumns={tableColumns} BodyRow={specialties} />
       <div className="screen">
         <Modal isOpen={isModalOpen} onClose={closeModal}>
-          <p>Contenido del modal.</p>
-          <button
-            onClick={() => {
-              handleDelete(idToDelete)
-              closeModal()
-              fetchSpecialties()
-            }}
-          >
-            Eliminar
-          </button>
-          <button onClick={closeModal}>Cerrar Modal</button>
+          <CloseButton onClick={closeModal}>x</CloseButton>
+          <p>
+            Tem certeza que deseja{' '}
+            <span
+              style={{
+                color: 'red',
+                textDecoration: 'underline',
+                textDecorationColor: 'red'
+              }}
+            >
+              excluir
+            </span>{' '}
+            este item?
+          </p>
+          <div>
+            <GreenButtonForDelete
+              onClick={() => {
+                handleDelete(idToDelete ?? 0)
+                closeModal()
+                fetchSpecialties()
+              }}
+            >
+              Sim, excluir item
+            </GreenButtonForDelete>
+          </div>
+          <BackRedButton onClick={closeModal}>Voltar</BackRedButton>
         </Modal>
       </div>
     </>

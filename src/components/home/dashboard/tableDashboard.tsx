@@ -5,7 +5,7 @@ import {
   TitleForTableDashboard
 } from '@/assets/styles/home/dashboard/tableDashboard'
 import { Link } from 'react-router-dom'
-import { GetLastUsers, GetLastUsersDashboard } from '@/config/servicies'
+import { GetLastUsers, GetLastUsersDashboard } from '@/config/usersServicies'
 import { useEffect, useState } from 'react'
 import { TableComponent } from '@/components/table/table'
 
@@ -26,10 +26,10 @@ export const TableDashboard = () => {
           let dataTemp: DataTempItem[] = []
           userData.content.forEach((item: UserData) => {
             dataTemp.push({
-              user: item.name,
+              user: `${item.firstName} ${item.lastName}`,
               email: item.email,
               whatsapp: item.phone,
-              userType: item.profiles.length > 0 ? item.profiles[0].name : ''
+              userType: item.profiles.length > 0 ? item.profiles[0].name : '-'
             })
           })
           setUserDataProcessed(dataTemp)

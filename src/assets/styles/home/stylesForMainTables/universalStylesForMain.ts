@@ -88,17 +88,25 @@ export const MenuSelectFilter = styled.select`
 
 export const GreenButtonForAdd = styled.button`
   width: 20%;
-  height: 80%;
+  height: 100%;
   border-radius: 16px;
   background: #00c247;
   color: white;
   border: none;
   font-family: 'Poppins', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.5;
   letter-spacing: 0.2px;
+  margin-right: 2%;
   padding: 0.8%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a {
+    text-decoration: none;
+    color: white;
+  }
   img {
     width: 8%;
     height: 35%;

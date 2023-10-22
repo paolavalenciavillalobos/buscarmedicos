@@ -6,14 +6,16 @@ import {
   Search
 } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import SearchIcon from '../../assets/images/search.png'
+import AddButton from '../../assets/images/add.png'
 import { GreenButtonForAdd } from '@/assets/styles/home/stylesForMainTables/universalStylesForMain'
 import { SpecialtiesTable } from '@/components/especialidades/especialidadesTable'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { Pagination } from '@mui/material'
 
 export const EspecialidadesMain = () => {
   const [pagina, setPagina] = useState(0)
-  const [elementosPorPagina, setElementosPorPagina] = useState(3)
+  const [elementosPorPagina, setElementosPorPagina] = useState(10)
   const [searchTerm, setSearchTerm] = useState('')
 
   console.log(pagina, 'main')
@@ -36,6 +38,7 @@ export const EspecialidadesMain = () => {
               <img src={SearchIcon} alt="search" />
             </Search>
             <GreenButtonForAdd>
+              <img src={AddButton} />
               <Link to={'/especialidades-criar'}>nova especialidade</Link>
             </GreenButtonForAdd>
           </HeaderOnTable>
@@ -44,12 +47,20 @@ export const EspecialidadesMain = () => {
             pagina={pagina}
             elementosPorPagina={elementosPorPagina}
             setPagina={setPagina}
-            setElementosPorPagina={setElementosPorPagina}
           />
-          <button onClick={() => setPagina(pagina - 1)} disabled={pagina === 0}>
-            Anterior
-          </button>
-          <button onClick={() => setPagina(pagina + 1)}>Siguiente</button>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Pagination
+              count={4}
+              page={pagina}
+              onChange={(event, value) => setPagina(value)}
+              sx={{
+                '&.Mui-selected': {
+                  backgroundColor: '#046639',
+                  color: '#ffffff'
+                }
+              }}
+            />
+          </div>
         </DivForTable>
       </div>
     </>

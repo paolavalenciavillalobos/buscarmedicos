@@ -1,4 +1,18 @@
+import { AxiosResponse } from 'axios'
 import Api from '../Api'
+
+interface SpecialtiesApi extends GetApi {
+  content: {
+    id: number
+    name: string
+    enabled: boolean
+    createdAt: string
+    updatedAt: string
+    createdBy: string
+    updatedBy: string
+    active: boolean
+  }[]
+}
 
 export const GetSpecialties = async (
   searchTerm: string | null,
@@ -8,10 +22,13 @@ export const GetSpecialties = async (
   console.log('pagina', pagina)
   try {
     const token = localStorage.getItem('token')
-    const dataGet = await Api.get(`/specialties`, {
-      headers: { Authorization: token },
-      params: { page: pagina, size: elementosPorPagina, search: searchTerm }
-    })
+    const dataGet: AxiosResponse<SpecialtiesApi> = await Api.get(
+      `/specialties`,
+      {
+        headers: { Authorization: token },
+        params: { page: pagina, size: elementosPorPagina, search: searchTerm }
+      }
+    )
     return dataGet.data
   } catch (error) {
     throw error
@@ -36,7 +53,7 @@ export const createPost = async (data: datatypo) => {
   }
 }
 
-export const UpdateSpecialties = async (id: string, data: datatypo) => {
+export const UpdateSpecialties = async (id: number, data: datatypo) => {
   console.log(data)
   try {
     const token = localStorage.getItem('token')

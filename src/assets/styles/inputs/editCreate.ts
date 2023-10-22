@@ -86,3 +86,32 @@ export const DivForTitle = styled.div`
   padding: 1%;
   display: flex;
 `
+
+export const InputDadosView = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 50%;
+  padding-right: 3%;
+  margin-top: 1.5%;
+  margin-bottom: 1.5%;
+  input {
+    border-radius: 16px;
+    border: 2px solid #e0e0e0;
+    padding: 4%;
+  }
+  label {
+    padding-bottom: 2%;
+    color: #757575;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.20000000298023224px;
+  }
+`
+export const BoxForFormView = styled.div`
+  height: 30%;
+  width: 100%;
+  padding: 1%;
+`

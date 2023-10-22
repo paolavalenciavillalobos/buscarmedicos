@@ -10,7 +10,7 @@ import {
   Box,
   PasswordBox
 } from '@/assets/styles/login'
-import { LoginPost } from '@/config/servicies'
+import { LoginPost } from '@/config/usersServicies'
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material'
 
 const Login = () => {

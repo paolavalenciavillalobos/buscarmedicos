@@ -1,5 +1,3 @@
-import React, { useState } from 'react'
-//import './Modal.css' // Estilos del modal
 import {
   ModalContainer,
   CloseButton,
@@ -7,14 +5,18 @@ import {
   ModalContent
 } from '../../assets/styles/modal/modal'
 
-function Modal({ isOpen, onClose, children }) {
+interface ModalType {
+  isOpen: boolean
+  onClose: () => void
+  children: React.ReactNode
+}
+
+function Modal({ isOpen, onClose, children }: ModalType) {
   if (!isOpen) return null
 
   return (
     <Overlay>
       <ModalContainer>
-        <CloseButton onClick={onClose}>X</CloseButton>
-        <h2>Modal Title</h2>
         <ModalContent>{children}</ModalContent>
       </ModalContainer>
     </Overlay>
